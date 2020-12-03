@@ -1,0 +1,91 @@
+
+{% if pages > 1 %}
+{% set leftLimit = 2 %}
+{% set rightLimit = 3 %}
+
+<div class="pagination in-center">
+    
+    <ul>
+
+        {% if currentPage != 1 %}
+            <li><a class="prev click-page" href="{{ currentPage - 1 }}"><i class="fa fa-angle-left"></i></a></li>
+        {% endif %}
+
+        {% if pages < leftLimit + rightLimit + 2 %}
+
+        {% for i in 1..pages %}
+            <li>
+                <a href="{{ i }}" class="click-page {{ currentPage == i ? 'active' : '' }}">
+                    {{ i }}
+                </a>
+            </li>
+        {% endfor %}
+
+        {% else %}
+
+        {% if currentPage > leftLimit and currentPage < (pages - rightLimit) %}
+        
+        {% set i = currentPage - leftLimit %}
+            {% if currentPage > 3 %}
+            <li>
+                <a>...</a>
+            </li>
+            {% endif %}
+        {% for i in i..(currentPage + rightLimit) %}
+            <li>
+                <a href="{{ i }}" class="click-page {{ currentPage == i ? 'active' : '' }}">
+                    {{ i }}
+                </a>
+            </li>
+        {% endfor %}
+            <li>
+                <a>...</a>
+            </li>
+        {% elseif currentPage <= leftLimit%}
+        
+        {% set iSlice = 1 + leftLimit - currentPage %}
+
+        {% for i in 1..(currentPage + (rightLimit + iSlice)) %}
+            <li>
+                <a href="{{ i }}" class="click-page {{ currentPage == i ? 'active' : '' }}">
+                    {{ i }}
+                </a>
+            </li>
+        {% endfor %}
+            <li>
+                <a>...</a>
+            </li>
+            <li>
+                <a href="{{ pages }}" class="click-page">
+                    {{ pages }}
+                </a>
+            </li>
+        {% else %}  
+        
+        {% set iSlice = rightLimit - (pages - currentPage) %}
+        
+        {% set i = currentPage - (leftLimit + iSlice) %}
+        
+            <li>
+                <a>...</a>
+            </li>
+        {% for i in i..pages %}
+            <li>
+                <a href="{{ i }}" class="click-page {{ currentPage == i ? 'active' : '' }}">
+                    {{ i }}
+                </a>
+            </li>
+        {% endfor %}
+
+        {% endif %}
+
+        {% endif %} 
+        
+        {% if pages != currentPage %}
+            <li><a class="next click-page" href="{{ currentPage + 1 }}"><i class="fa fa-angle-right"></i></a></li>
+        {% endif %} 
+
+    </ul>
+
+</div>
+{% endif %}

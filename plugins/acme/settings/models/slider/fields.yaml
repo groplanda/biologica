@@ -1,0 +1,30 @@
+fields:
+    title:
+        label: Заголовок
+        span: auto
+        type: text
+    subtitle:
+        label: Подзаголовок
+        span: auto
+        type: text
+tabs:
+    fields:
+        image:
+            label: Слайд
+            mode: image
+            imageWidth: '150'
+            imageHeight: '150'
+            span: auto
+            type: mediafinder
+            tab: Изображение
+        link:
+            label: Ссылка
+            span: auto
+            type: text
+            tab: Изображение
+        body:
+            label: Описание
+            size: large
+            span: full
+            type: textarea
+            tab: Текст

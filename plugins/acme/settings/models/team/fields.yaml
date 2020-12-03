@@ -1,0 +1,35 @@
+fields:
+    name:
+        label: Имя
+        span: auto
+        type: text
+    position:
+        label: Должность
+        span: auto
+        type: text
+    photo:
+        label: Фото
+        mode: image
+        imageWidth: '150'
+        imageHeight: '150'
+        span: auto
+        type: mediafinder
+    social:
+        label: Ссылки
+        prompt: 'Add new item'
+        span: full
+        type: repeater
+        form:
+            fields:
+                icon:
+                    label: Иконка
+                    span: left
+                    placeholder: twitter
+                    default: twitter
+                    type: text
+                    comment: icofont.com/icons
+                link:
+                    label: Ссылка
+                    span: right
+                    placeholder: 'https://twitter.com'
+                    type: text

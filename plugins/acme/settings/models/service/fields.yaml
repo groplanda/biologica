@@ -1,0 +1,37 @@
+fields:
+    title:
+        label: Заголовок
+        span: full
+        type: text
+    description:
+        label: Описание
+        size: tiny
+        span: full
+        type: textarea
+    services:
+        label: Услуги
+        prompt: Добавить
+        span: full
+        type: repeater
+        form:
+            fields:
+                service_title:
+                    label: Название
+                    span: auto
+                    type: text
+                service_link:
+                    label: Ссылка
+                    span: auto
+                    type: text
+                service_image:
+                    label: Изображение
+                    mode: image
+                    imageWidth: '100'
+                    imageHeight: '100'
+                    span: auto
+                    type: mediafinder
+                service_desc:
+                    label: Описание
+                    size: ''
+                    span: auto
+                    type: textarea

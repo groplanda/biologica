@@ -1,0 +1,20 @@
+plugin:
+    name: 'acme.contactform::lang.plugin.name'
+    description: 'acme.contactform::lang.plugin.description'
+    author: Acme
+    icon: oc-icon-envelope
+    homepage: ''
+navigation:
+    application:
+        label: Заявки
+        url: acme/contactform/applications
+        icon: icon-envelope-o
+        sideMenu:
+            application-create:
+                label: Создать
+                url: /acme/contactform/applications/create
+                icon: icon-pencil-square-o
+            side-menu-subscribe:
+                label: Подписки
+                url: acme/contactform/subscribes
+                icon: icon-users

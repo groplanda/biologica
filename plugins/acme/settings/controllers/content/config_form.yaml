@@ -1,0 +1,10 @@
+name: Content
+form: $/acme/settings/models/content/fields.yaml
+modelClass: Acme\Settings\Models\Content
+defaultRedirect: acme/settings/content
+create:
+    redirect: 'acme/settings/content/update/:id'
+    redirectClose: acme/settings/content
+update:
+    redirect: acme/settings/content
+    redirectClose: acme/settings/content

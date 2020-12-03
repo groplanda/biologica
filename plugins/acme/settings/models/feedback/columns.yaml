@@ -1,0 +1,25 @@
+columns:
+    name:
+        label: Имя
+        type: text
+        searchable: true
+        sortable: true
+    avatar:
+        label: Фото
+        type: partial
+        path: ~/plugins/acme/settings/models/feedback/_avatar_column.htm
+    time:
+        label: Дата
+        type: date
+        searchable: true
+        sortable: true
+    status:
+        label: Опубликован
+        type: switch
+        searchable: true
+        sortable: true
+    rating:
+        label: Оценка
+        type: number
+        searchable: true
+        sortable: true

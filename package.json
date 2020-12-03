@@ -1,0 +1,70 @@
+{
+  "name": "octobercms",
+  "description": "Free, open-source, self-hosted CMS platform based on the Laravel PHP Framework.",
+  "directories": {
+    "test": "tests/js/cases",
+    "helpers": "tests/js/helpers"
+  },
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/octobercms/october.git"
+  },
+  "contributors": [
+    {
+      "name": "Alexey Bobkov",
+      "email": "aleksey.bobkov@gmail.com"
+    },
+    {
+      "name": "Samuel Georges",
+      "email": "daftspunky@gmail.com"
+    },
+    {
+      "name": "Luke Towers",
+      "email": "octobercms@luketowers.ca",
+      "url": "https://luketowers.ca"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/octobercms/october/issues"
+  },
+  "homepage": "https://octobercms.com/",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "browser-sync": "^2.26.13",
+    "browser-sync-webpack-plugin": "^2.0.1",
+    "chai": "^4.2.0",
+    "jquery": "^3.4.1",
+    "jsdom": "^15.1.1",
+    "laravel-mix": "^5.0.9",
+    "mocha": "^6.2.0",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.29.0",
+    "sass-loader": "^8.0.2",
+    "sinon": "^7.4.1",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@fancyapps/fancybox": "^3.5.7",
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "animate.css": "^4.1.1",
+    "countup.js": "^2.0.7",
+    "cross-env": "^7.0.2",
+    "jquery": "^3.5.1",
+    "slick-carousel": "^1.8.1"
+  }
+}

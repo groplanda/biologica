@@ -1,0 +1,18 @@
+<p>
+Новый заказ с сайта от <b>{{ user_name }}</b> - <b>{{ user_phone }}</b>
+</p>
+{% if user_email %}
+<p>
+    E-mail: {{ user_email }}
+</p>
+{% endif %}
+{% if user_adress %}
+<p>
+    Адрес: {{ user_adress }}
+</p>
+{% endif %}
+{% if user_comment %}
+<p>
+    Комментарий: {{ user_comment }}
+</p>
+{% endif %}

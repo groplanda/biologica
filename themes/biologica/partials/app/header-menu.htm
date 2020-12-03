@@ -1,0 +1,12 @@
+description = "Header menu"
+
+[viewBag]
+snippetCode = "menu-items"
+==
+<ul class="nav-list">
+  {% for item in items %}
+  <li class="nav-item">
+    <a href="{{ item.url }}" class="nav-link {{ item.viewBag['cssClass'] ? item.viewBag['cssClass'] : '' }} {{ item.isActive or item.isChildActive ? 'active' : '' }}">{{ item.title }}</a>
+  </li>
+  {% endfor %}
+</ul>

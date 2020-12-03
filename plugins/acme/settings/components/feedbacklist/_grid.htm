@@ -1,0 +1,29 @@
+{% set feedbacks = __SELF__.feedbacks %}
+<section id="{{__SELF__.id}}" class="reviews wow fadeInUpBig">
+  <div class="container">
+    <div class="row">
+      <div class="title">
+        <div class="col-12 col-sm-12 col-md-8 offset-md-2">
+          <span>Отзывы</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for feedback in feedbacks %}
+      {% set avatar = feedback.avatar %}
+      <div class="col-sm-12 col-md-6">
+        <div class="reviews-block wow bounce">
+          <div class="reviews-img"><img src="{{ avatar.thumb(100, 100, {'mode': 'crop'}) }}" alt="{{feedback.name}}" class="fr-fic fr-dii"></div>
+          <div class="reviews-text">
+            <span>{{feedback.name}}</span>
+            <p>
+              {{feedback.rewiew}}
+              <br><br><br><br>
+            </p>
+          </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+  </div>
+</section>

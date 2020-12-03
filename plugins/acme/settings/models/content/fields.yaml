@@ -1,0 +1,21 @@
+fields:
+    title:
+        label: Заголовок
+        span: auto
+        type: text
+    link:
+        label: Ссылка
+        span: auto
+        type: text
+    content:
+        label: 'Текст описания'
+        size: huge
+        span: full
+        type: richeditor
+    image:
+        label: Фото
+        mode: image
+        imageWidth: '120'
+        imageHeight: '120'
+        span: auto
+        type: mediafinder

@@ -1,0 +1,37 @@
+fields:
+    user_name:
+        label: Имя
+        span: auto
+        type: text
+    user_phone:
+        label: Телефон
+        span: auto
+        type: text
+    user_mail:
+        label: E-mail
+        span: auto
+        type: text
+    user_ip:
+        label: Ip
+        span: auto
+        readOnly: 1
+        type: text
+    user_message:
+        label: Сообщение
+        size: large
+        span: full
+        type: textarea
+    user_status:
+        label: Статус
+        options:
+            1: Новый
+            2: 'В работе'
+            3: Закрыт
+        showSearch: true
+        span: auto
+        type: dropdown
+    created_at:
+        label: Добавлен
+        span: auto
+        readOnly: 1
+        type: text

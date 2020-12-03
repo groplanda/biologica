@@ -1,0 +1,10 @@
+name: Teams
+form: $/acme/settings/models/team/fields.yaml
+modelClass: Acme\Settings\Models\Team
+defaultRedirect: acme/settings/teams
+create:
+    redirect: 'acme/settings/teams/update/:id'
+    redirectClose: acme/settings/teams
+update:
+    redirect: acme/settings/teams
+    redirectClose: acme/settings/teams

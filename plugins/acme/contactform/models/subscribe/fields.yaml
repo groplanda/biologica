@@ -1,0 +1,9 @@
+fields:
+    subscribe_mail:
+        label: E-mail
+        span: auto
+        type: text
+    created_at:
+        label: 'Дата добавления'
+        span: auto
+        type: text

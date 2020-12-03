@@ -1,0 +1,63 @@
+fields:
+    title:
+        label: Название
+        span: left
+        type: text
+    type:
+        label: Вариант
+        options:
+            offline: Offline
+            online: Online
+        showSearch: true
+        span: auto
+        type: dropdown
+    description:
+        label: Описание
+        size: large
+        span: full
+        type: richeditor
+    file:
+        label: Файл
+        mode: file
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    section1:
+        label: Онлайн
+        span: full
+        trigger:
+            action: show
+            field: type
+            condition: 'value[online]'
+        type: section
+    poster:
+        label: Фото
+        mode: image
+        imageWidth: '150'
+        imageHeight: '150'
+        span: auto
+        trigger:
+            action: show
+            field: type
+            condition: 'value[online]'
+        type: mediafinder
+    price:
+        label: Цена
+        span: auto
+        trigger:
+            action: show
+            field: type
+            condition: 'value[online]'
+        type: text
+    iframe:
+        label: 'Вставка с getcourse'
+        size: large
+        span: full
+        trigger:
+            action: show
+            field: type
+            condition: 'value[online]'
+        type: textarea

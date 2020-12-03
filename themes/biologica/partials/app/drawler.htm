@@ -1,0 +1,22 @@
+description = "Drawler"
+
+[viewBag]
+
+[staticMenu]
+code = "left-menu"
+==
+<div class="popup-draweler animate__animated" data-modal="true">
+  <div class="popup-draweler__dialog">
+    <div class="popup-draweler__window">
+      <div class="popup-draweler__body">
+        <nav class="popup-draweler__nav-menu">
+            {% partial "app/drawler-menu" items=menuItems %}
+        </nav>
+      </div>
+      <div class="popup-draweler__footer">
+        <span class="adress">{{ this.theme.address }}</span>
+        <a class="phone" href="tel:{{ this.theme.phone }}">{{ this.theme.phone }}</a>
+      </div>
+    </div>
+  </div>
+</div>

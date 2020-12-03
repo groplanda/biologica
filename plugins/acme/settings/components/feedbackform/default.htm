@@ -1,0 +1,62 @@
+
+<div class="rewiews__form center">
+  <h4 class="subtitle">Оставить отзыв</h4>
+  <form
+    data-request="onSaveFeedback"
+    data-request-validate
+    data-request-files data-request-flash
+    class="ajax-form reviews-form"
+  >
+    <input type="hidden" name="_handler" value="onSaveFeedback">
+    {{ form_token() }}
+    {{ form_sessionKey() }}
+    <div class="row-input">
+      <input type="text" class="input center"  id="name" name="name" placeholder="Ваше имя" />
+      <span class="text-danger animate__animated" data-validate-for="name"></span>
+    </div>
+    <div class="row-input">
+      <input type="email" class="input center" id="email" name="email" placeholder="Ваш E-mail" />
+      <span class="text-danger animate__animated" data-validate-for="email"></span>
+    </div>
+    <div class="row-input">
+      <textarea class="input center" name="message" id="message" placeholder="Ваш отзыв"></textarea>
+      <span class="text-danger animate__animated" data-validate-for="message"></span>
+    </div>
+    <div class="row-input">
+      <div class="stars">
+        <input class="star star-5" value="5" id="star-5" type="radio" name="rating">
+        <label class="star star-5" for="star-5"></label>
+        <input class="star star-4" value="4" id="star-4" type="radio" name="rating">
+        <label class="star star-4" for="star-4"></label>
+        <input class="star star-3" value="3" id="star-3" type="radio" name="rating">
+        <label class="star star-3" for="star-3"></label>
+        <input class="star star-2" value="2" id="star-2" type="radio" name="rating">
+        <label class="star star-2" for="star-2"></label>
+        <input class="star star-1" value="1" id="star-1" type="radio" name="rating">
+        <label class="star star-1" for="star-1"></label>
+      </div>
+      <span class="text-danger animate__animated" data-validate-for="rating"></span>
+    </div>
+    <div class="row-input">
+      <input type="file" name="avatar"  accept="image/*" id="file" class="input-file">
+      <label for="file" class="btn btn-tertiary js-labelFile">
+        <i class="fas fa-upload"></i>
+        <span class="js-fileName">Добавить фото</span>
+      </label>
+      <span class="text-danger animate__animated" data-validate-for="avatar"></span>
+    </div>
+    <div class="privacy">
+      <label for="privacy-policy-rewiews"><input type="checkbox" id="privacy-policy-rewiews" />
+        <span>Согласен с <a href="/policy" target="_blank">политикой конфиденциальности</a></span>
+      </label>
+    </div>
+    <div class="row-input">
+      <button type="submit" disabled="disabled" class="button violet" data-attach-loading>Оставить отзыв</button>
+    </div>
+    {% flash %}
+    <div class="text-center mt-3 mb-3 alert alert-{{ type }}" data-interval="4">
+        {{ message }}
+    </div>
+    {% endflash %}
+  </form>
+</div>

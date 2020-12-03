@@ -1,0 +1,10 @@
+name: Categories
+form: $/acme/shop/models/category/fields.yaml
+modelClass: Acme\Shop\Models\Category
+defaultRedirect: acme/shop/categories
+create:
+    redirect: 'acme/shop/categories/update/:id'
+    redirectClose: acme/shop/categories
+update:
+    redirect: acme/shop/categories
+    redirectClose: acme/shop/categories

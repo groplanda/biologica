@@ -1,0 +1,79 @@
+<!-- Popular Products -->
+<section class="padding-top-100 padding-bottom-100">
+    <div class="container"> 
+    
+    <!-- SHOP DETAIL -->
+    <div class="shop-detail">
+        <div class="row"> 
+        
+        <!-- Popular Images Slider -->
+        <div class="col-md-7"> 
+            
+            <!-- Images Slider -->
+            <div class="images-slider">
+            <ul class="slides">
+                <li data-thumb="{{ product.image|media|resize(150, 185, { mode: 'crop', quality: '80' }) }}"> <img class="img-responsive" src="{{ product.image|media|resize(560, 694, { mode: 'crop', quality: '80' }) }}"  alt="{{ product.title }}"></li>
+                {% if product.gallery %}
+                {% for image in product.gallery %}
+                <li data-thumb="{{ image.path|resize(150, 185, { mode: 'crop', quality: '80' }) }}">
+                    <img class="img-responsive" src="{{ image.path|resize(560, 694, { mode: 'crop', quality: '80' }) }}"  alt="{{ image.title ? image.title : product.title }}">
+                </li>
+                {% endfor %}
+                {% endif %}
+            </ul>
+            </div>
+        </div>
+        
+        <!-- COntent -->
+        <div class="col-md-5">
+            <h4>{{ product.title }}</h4>
+            <div class="rating-strs"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div>
+            {% if product.price %}
+                <span class="price"><small>₽</small>{{ product.sale ? product.sale : product.price }}</span>
+            {% endif %}
+            <ul class="item-owner">
+            <li>Категория:<span> 
+                {% for category in product.categories %}
+                    <a>{{ category.title }}</a>{{ loop.last ? '' : ', ' }}</span>
+                {% endfor %}
+            </li>
+            </ul>
+            
+            <!-- Item Detail -->
+            {{ product.description|raw }}
+            
+            <!-- Short By -->
+            <div class="some-info">
+            {% if product.price %}
+            <form id="addToCart">
+                <ul class="row margin-top-30">
+                    <li class="col-md-6"> 
+                    
+                    <!-- Quantity -->
+                    <div class="quinty">
+                        <button type="button" class="quantity-left-minus"  data-type="minus" data-field=""> <span>-</span> </button>
+                        <input type="number" id="quantity" name="qty" class="form-control input-number" value="1" data-price="{{ product.sale ? product.sale : product.price }}" data-image="{{ product.image|media }}" data-title="{{ product.title }}" data-id="{{ product.id }}">
+                        <button type="button" class="quantity-right-plus" data-type="plus" data-field=""> <span>+</span> </button>
+                    </div>
+                    </li>
+                    
+                    <!-- ADD TO CART -->
+                    <li class="col-md-6"> 
+                        <button type="submit" class="btn add-to-cart">В КОРЗИНУ</button>
+                    </li>
+                </ul>
+            </form>
+            {% endif %}
+            
+            <!-- INFOMATION -->
+            <div class="inner-info">
+                <h5>Свяжитесь удобным способом:</h5>
+                <!-- Social Icons -->
+                {% partial 'app/social' %}
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>

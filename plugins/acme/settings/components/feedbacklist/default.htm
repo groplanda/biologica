@@ -1,0 +1,33 @@
+{% set feedbacks = __SELF__.feedbacks %}
+<div id="{{__SELF__.id}}" class="rewiews">
+  <div class="rewiews__wrap">
+    <div class="rewiews__avatar">
+      <ul class="rewiews__avatar__list">
+        {% for feedback in feedbacks %}
+        {% set avatar = feedback.avatar %}
+        <li data-page="{{feedback.id}}" class="rewiews__avatar__list__item  {{ loop.index == 1 ? 'active' : '' }}">
+          <img src="{{ avatar.thumb(160, 160, {'mode': 'crop', quality: '90'}) }}" alt="{{feedback.name}}">
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="rewiews__text">
+      {% for feedback in feedbacks %}
+      <div class="rewiews__text__comment page-{{feedback.id}} animate__animated {{ loop.index == 1 ? 'active' : '' }}">
+        <p>{{feedback.rewiew}}</p>
+        <div class="intro">
+          <span class="name">{{feedback.name}}</span>
+          <span class="stars">
+            {% for i in 1..feedback.rating %}
+            <i class="fas fa-star"></i>
+            {% endfor %}
+          </span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div><!--rewiews-->
+<div class="subtitle center">
+  <a class="instagram__link" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDA2MTEwODM2MTM4MDk0?igshid=1o79cy3d5feum&story_media_id=2092966779094393905" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i>&nbsp;Больше отзывов в нашем Instagram</a>
+</div>

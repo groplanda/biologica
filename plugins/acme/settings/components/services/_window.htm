@@ -1,0 +1,27 @@
+{% set service = __SELF__.service %}
+<section id="{{__SELF__.id}}" class="types">
+  <div class="container">
+      <div class="head w-100 text-center">
+          <h3>{{service.title|raw}}</h3>
+      </div>
+      <div class="row">
+        {% for item in service.services %}
+        {% set image = item.service_image %}
+          <div class="col-md-3">
+              <div class="types__item">
+                  <div class="image rounded">
+                      <img src="{{ image|media|resize(false, 190, { quality: '80' }) }}" alt="{{ item.service_title }}" class="d-block m-auto">
+                  </div>
+                  <div class="content text-center">
+                      <div class="title">{{ item.service_title }}</div>
+                      <div class="price">
+                          <span>₽</span>{{ item.service_desc|raw }}
+                      </div>
+                      <button class="theme-btn rounded-pill call-modal">Заказать</button>
+                  </div>
+              </div>
+          </div><!--item-->        
+        {% endfor %}
+      </div>
+  </div>
+</section>

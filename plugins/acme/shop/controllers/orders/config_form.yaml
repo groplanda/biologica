@@ -1,0 +1,10 @@
+name: Orders
+form: $/acme/shop/models/order/fields.yaml
+modelClass: Acme\Shop\Models\Order
+defaultRedirect: acme/shop/orders
+create:
+    redirect: 'acme/shop/orders/update/:id'
+    redirectClose: acme/shop/orders
+update:
+    redirect: acme/shop/orders
+    redirectClose: acme/shop/orders

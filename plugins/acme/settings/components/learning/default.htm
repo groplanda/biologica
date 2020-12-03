@@ -1,0 +1,37 @@
+{% set programs = __SELF__.programs %}
+{% for program in programs %}
+<div class="courses__time">
+  <h3 class="subtitle">{{ program.title }}</h3>
+  <img class="courses__pic" src="{{ program.poster|media|resize(500, 400, { mode: 'crop', quality: '80', extension: 'jpg' }) }}" alt="{{ program.title }}">
+  <div class="courses__download">
+    <a class="courses__download__link" href="{{ program.file.path }}" download>
+      <img src="{{ 'assets/images/icon/pdf.svg'|theme }}" alt="скачать"><span>Скачать расписание на год.</span>
+    </a>
+  </div>
+</div>
+<div class="courses__box">
+  <div class="line"></div>
+  <div class="courses__table">
+    <div class="price">{{ program.price }}₽ / <span>месяц</span></div>
+    <div class="price-details">
+      {{ program.description|raw }}
+    </div>
+    <div class="price-buy center">
+      <button class="button gradient open-buy"
+        data-request="{{ __SELF__ }}::onLoadIframe"
+        data-request-update="'{{ __SELF__ }}::modal': '#learning'"
+        data-request-data="id: {{ program.id }}"
+      >Купить</button>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<div class="popup modal-buy animate__animated" data-modal="true">
+  <div class="popup__dialog">
+    <div class="popup__window animate__animated">
+      <a href="#" class="close"><i class="fas fa-times"></i></a>
+      <div class="popup__body" id="learning"></div>
+    </div>
+  </div>
+</div>

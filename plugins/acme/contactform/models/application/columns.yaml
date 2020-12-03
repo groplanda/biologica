@@ -1,0 +1,20 @@
+columns:
+    user_name:
+        label: Имя
+        type: text
+        searchable: true
+        sortable: true
+    user_phone:
+        label: Телефон
+        type: text
+        searchable: true
+    user_status:
+        label: Статус
+        type: text
+        searchable: true
+        sortable: true
+    created_at:
+        label: Добавлен
+        type: datetime
+        searchable: true
+        sortable: true

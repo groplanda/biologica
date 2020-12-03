@@ -1,0 +1,15 @@
+{% set advantage = __SELF__.advantages %}
+{% set rows = advantage.advantages %}
+
+<section class="shipment">
+  <div class="container">
+    {% for row in rows %}
+    <ul>
+      <li>
+        <img class="mb-4" src="{{ row.a_ico|media|resize(64, 64, { mode: 'crop', quality: '100' }) }}" alt="{{ row.a_title|raw }}">
+        <h4>{{ row.a_title|raw }}</h4>
+      </li>
+    </ul>
+    {% endfor %}
+  </div>
+</section>

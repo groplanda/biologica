@@ -1,0 +1,59 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table acme_settings_service'
+    - builder_table_create_acme_settings_service.php
+1.0.3:
+    - 'Updated table acme_settings_service'
+    - builder_table_update_acme_settings_service.php
+1.0.4:
+    - 'Created table acme_settings_content'
+    - builder_table_create_acme_settings_content.php
+1.0.5:
+    - 'Updated table acme_settings_service'
+    - builder_table_update_acme_settings_service_2.php
+1.0.6:
+    - 'Created table acme_settings_advantages'
+    - builder_table_create_acme_settings_advantages.php
+1.0.7:
+    - 'Updated table acme_settings_advantages'
+    - builder_table_update_acme_settings_advantages.php
+1.0.8:
+    - 'Updated table acme_settings_advantages'
+    - builder_table_update_acme_settings_advantages_2.php
+1.0.9:
+    - 'Created table acme_settings_feedback'
+    - builder_table_create_acme_settings_feedback.php
+1.0.10:
+    - 'Updated table acme_settings_feedback'
+    - builder_table_update_acme_settings_feedback.php
+1.0.11:
+    - 'Updated table acme_settings_feedback'
+    - builder_table_update_acme_settings_feedback_2.php
+1.0.12:
+    - 'Updated table acme_settings_feedback'
+    - builder_table_update_acme_settings_feedback_3.php
+1.0.13:
+    - 'Updated table acme_settings_feedback'
+    - builder_table_update_acme_settings_feedback_4.php
+1.0.14:
+    - 'Updated table acme_settings_feedback'
+    - builder_table_update_acme_settings_feedback_5.php
+1.0.15:
+    - 'Created table acme_settings_project'
+    - builder_table_create_acme_settings_project.php
+1.0.16:
+    - 'Created table acme_settings_slider'
+    - builder_table_create_acme_settings_slider.php
+1.0.17:
+    - 'Created table acme_settings_team'
+    - builder_table_create_acme_settings_team.php
+1.0.18:
+    - 'Drop table acme_settings_project'
+    - builder_table_delete_acme_settings_project.php
+1.0.19:
+    - 'Created table acme_settings_learning'
+    - builder_table_create_acme_settings_learning.php
+1.0.20:
+    - 'Updated table acme_settings_learning'
+    - builder_table_update_acme_settings_learning.php

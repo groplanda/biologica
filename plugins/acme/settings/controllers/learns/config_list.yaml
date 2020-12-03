@@ -1,0 +1,12 @@
+list: $/acme/settings/models/learn/columns.yaml
+modelClass: Acme\Settings\Models\Learn
+title: Learns
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'acme/settings/learns/update/:id'

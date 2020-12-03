@@ -1,0 +1,17 @@
+description = "Header"
+
+[viewBag]
+
+[staticMenu headerMenu]
+code = "top-menu"
+==
+<div class="header__wrapper">
+  <a href="/" class="logo">
+    <img src="{{ this.theme.logo|media|resize(250, false, { mode: 'crop', quality: '100' }) }}" alt="{{ this.theme.site_name}}">
+  </a>
+  <button class="hamburger open-menu"></button>
+  <button class="hamburger close-menu"></button>
+  <nav class="navbar">
+     {% partial "app/header-menu" items=menuItems %}
+  </nav>
+</div>

@@ -1,0 +1,17 @@
+{% set service = __SELF__.service %}
+
+<div id="{{ __SELF__.id }}" class="teachers">
+	<div class="teachers__wrap">
+		{% for item in service.services %}
+		<div class="teachers__item">
+			<div class="teachers__item__image">
+				<img src="{{ item.service_image|media|resize(300, 300, { mode: 'crop', quality: '90' }) }}" alt="{{ item.service_title }}" class="teachers__item__pic">
+			</div>
+			<p class="teachers__item__title small center">{{ item.service_title }}</p>
+			<p class="teachers__item__descr center small">
+				{{ item.service_desc|raw }}
+			</p>
+		</div>
+		{% endfor %}
+	</div>
+</div>

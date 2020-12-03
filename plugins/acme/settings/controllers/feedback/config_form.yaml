@@ -1,0 +1,10 @@
+name: Feedback
+form: $/acme/settings/models/feedback/fields.yaml
+modelClass: Acme\Settings\Models\Feedback
+defaultRedirect: acme/settings/feedback
+create:
+    redirect: 'acme/settings/feedback/update/:id'
+    redirectClose: acme/settings/feedback
+update:
+    redirect: acme/settings/feedback
+    redirectClose: acme/settings/feedback

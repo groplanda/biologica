@@ -1,0 +1,29 @@
+<form
+    id="{{ __SELF__.id }}"
+    data-request="{{ __SELF__ }}::onSend"
+    data-request-validate
+    data-request-flash
+    class="ajax-form"
+>
+    <div class="row-input">
+        <input type="text" name="user_name" class="input center" placeholder="Ваше имя" />
+        <span class="text-danger animate__animated" data-validate-for="user_name"></span>
+    </div>
+    <div class="row-input">
+        <input type="tel" name="user_phone" class="input center" placeholder="Ваше телефон" />
+        <span class="text-danger animate__animated" data-validate-for="user_phone"></span>
+    </div>
+    <div class="privacy">
+        <label for="privacy-policy-consultation-modal"><input type="checkbox" id="privacy-policy-consultation-modal">
+        <span>Согласен с <a href="/policy" target="_blank">политикой конфиденциальности</a></span>
+        </label>
+    </div>
+    <div class="row-input">
+        <button type="submit" disabled="disabled" class="button violet" data-attach-loading>Отправить</button>
+    </div>
+    {% flash %}
+    <div class="alert alert-{{ type }}" data-interval="4">
+        {{ message }}
+    </div>
+    {% endflash %}
+</form>

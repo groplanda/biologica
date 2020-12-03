@@ -1,0 +1,20 @@
+{% set type = __SELF__.type %}
+{% set content = __SELF__.content %}
+{% set image = content.image|media|resize(913, 928, { mode: 'crop', quality: '100', extension: 'png' }) %}
+<section id="{{ __SELF__.id }}" class="simple-head" style="background-image: url({{image}})" data-stellar-background-ratio="0.5">
+    <div class="position-center-center"> 
+        <!-- Container Fluid -->
+        <div class="container-full"> 
+        <!-- Header Text -->
+        <div class="text-left col-lg-8 no-padding">
+            {{content.content | raw}}
+            <h1 class="extra-huge-text">{{content.title}}</h1>
+            {% if content.link %}
+            <div class="text-btn"> 
+                <a href="{{content.link}}" class="btn btn-inverse margin-top-40">ПОДРОБНЕЕ</a> 
+            </div>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+</section>

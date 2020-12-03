@@ -1,0 +1,32 @@
+<form
+    id="{{ __SELF__.id }}"
+    class="ajax-form"
+    data-request="{{ __SELF__ }}::onSend"
+    data-request-validate
+    data-request-flash>
+    <div class="row-input">
+       <div class="input__wrapper">
+        <input type="text" name="user_name" class="input center" placeholder="Ваше имя*" />
+        <span class="small text-danger" data-validate-for="user_name"></span>
+       </div>
+       <div class="input__wrapper">
+        <input type="tel" name="user_phone" class="input center" placeholder="Ваш телефон*" />
+        <span class="small text-danger" data-validate-for="user_phone"></span>
+       </div>
+    </div>
+    <div class="privacy">
+      <label for="privacy-policy-consultation"><input type="checkbox" id="privacy-policy-consultation">
+        <span>Согласен с <a href="/policy" target="_blank">политикой конфиденциальности</a></span>
+      </label>
+    </div>
+    <div class="row-input">
+      <button type="submit" disabled="disabled" class="button violet" data-attach-loading>Отправить</button>
+      <div class="or">или</div>
+      <a href="mailto:{{this.theme.t_mail}}" class="button grey">Написать нам</a>
+    </div>
+    {% flash %}
+    <div class="alert alert-{{ type }}" data-interval="4">
+        {{ message }}
+    </div>
+    {% endflash %}
+</form>

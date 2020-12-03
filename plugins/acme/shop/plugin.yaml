@@ -1,0 +1,28 @@
+plugin:
+    name: 'acme.shop::lang.plugin.name'
+    description: 'acme.shop::lang.plugin.description'
+    author: Acme
+    icon: oc-icon-cart-plus
+    homepage: ''
+navigation:
+    main-menu-shop:
+        label: Товары
+        url: acme/shop/products
+        icon: icon-shopping-cart
+        sideMenu:
+            side-menu-add-product:
+                label: 'Добавить товар'
+                url: acme/shop/products/create
+                icon: icon-plus
+            side-menu-option:
+                label: Опции
+                url: acme/shop/options
+                icon: icon-gears
+            side-menu-cat:
+                label: Категории
+                url: acme/shop/categories
+                icon: icon-tags
+            side-menu-order:
+                label: Заказы
+                url: acme/shop/orders
+                icon: icon-info

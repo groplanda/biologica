@@ -1,0 +1,41 @@
+<section class="padding-top-100 padding-bottom-100">
+    <div class="container-full"> 
+        <!-- Main Heading -->
+        {% if this.page.fileName != 'category.htm' %}
+        <div class="heading text-center">
+            <h4>Наши товары</h4>
+            <span>Познакомьтесь с нашими лучшими товарами поближе!</span> 
+        </div>
+        {% endif %}
+        <div class="arrival-block shop-product">
+            {% if this.page.fileName != 'category.htm' %}
+            <ul id="shopCats" class="nav nav-tabs" role="tablist">
+                {% for category in categories %}
+                <li class="nav-item">
+                    <input id="cat-{{ category.id }}" class="checkbox_cat" type="checkbox" value="{{ category.id }}" name="filter[categories][]">
+                    <label for="cat-{{ category.id }}">{{ category.title }}</label>
+                </li>
+                {% endfor %}
+                <li class="nav-item refresh">
+                    <button id="refresh">&times;очистить</button>
+                </li>
+            </ul>
+            {% endif %}
+            <!-- Best Selling  -->
+            <div class="arrival-block col-item-6 list-group"">
+                <div class="overlay-preloader">
+                    <div class="position-center-center">
+                        <div class="ldr"></div>
+                    </div>
+                </div>
+                <div id="partialProducts"> 
+                    {% partial "ProductList::list" %}
+                </div>
+            </div>
+            
+            <div id="partialPaginate">
+                {% partial "ProductList::pagination" %}
+            </div>
+        </div>
+    </div>
+</section>

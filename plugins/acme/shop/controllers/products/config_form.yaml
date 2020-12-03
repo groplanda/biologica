@@ -1,0 +1,10 @@
+name: Products
+form: $/acme/shop/models/product/fields.yaml
+modelClass: Acme\Shop\Models\Product
+defaultRedirect: acme/shop/products
+create:
+    redirect: 'acme/shop/products/update/:id'
+    redirectClose: acme/shop/products
+update:
+    redirect: acme/shop/products
+    redirectClose: acme/shop/products

@@ -1,0 +1,13 @@
+scopes:
+
+  created_at:
+        label: Дата
+        type: daterange
+        conditions: created_at >= ':after' AND created_at <= ':before'
+
+  category:
+        label: Статус
+        modelClass: Acme\ContactForm\Models\Application
+        type: group
+        conditions: user_status in (:filtered)
+        nameFrom: user_status

@@ -1,0 +1,30 @@
+<?php
+$texts = ['new' => 'Новый', 'work' => 'В работе', 'finish' => 'Выполнен', 'close' => 'Закрыт'];
+?>
+<span class='<?= $value ?>'><?= $texts[$value] ?></span>
+<style>
+  .new, .work, .finish, .close {
+    position: relative;
+    padding-left: 15px;
+  }
+  .new::before, .work::before, .finish::before, .close::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 30px;
+    line-height: 15px;
+  }
+  .new::before, .new {
+    color: #dc3545;
+  }
+  .work::before, .work {
+    color:#007bff;
+  }
+  .finish::before, .finish {
+    color: #28a745;
+  }
+  .close::before, .close {
+    color: #6c757d;
+  }
+</style>

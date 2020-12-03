@@ -1,0 +1,16 @@
+columns:
+    title:
+        label: Название
+        type: text
+        searchable: true
+        sortable: true
+    type:
+        label: Тип
+        type: text
+        searchable: true
+        sortable: true
+    created_at:
+        label: 'Дата создания'
+        type: datetime
+        searchable: true
+        sortable: true

@@ -1,0 +1,5 @@
+title: Feedback
+modelClass: Acme\Settings\Models\Feedback
+nameFrom: name
+toolbar:
+    buttons: reorder_toolbar

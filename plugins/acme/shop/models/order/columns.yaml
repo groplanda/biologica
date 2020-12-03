@@ -1,0 +1,26 @@
+columns:
+    id:
+        label: 'ID товара'
+        type: number
+        searchable: false
+        sortable: true
+    name:
+        label: 'Название заказ'
+        type: text
+        searchable: false
+        sortable: true
+    user_phone:
+        label: Телефон
+        type: text
+        searchable: true
+        sortable: true
+    user_email:
+        label: E-mail
+        type: text
+        searchable: true
+        sortable: true
+    status:
+        label: Статус
+        type: partial
+        sortable: true
+        path: ~/plugins/acme/shop/models/order/_select_column.htm

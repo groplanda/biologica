@@ -1,0 +1,10 @@
+name: Learns
+form: $/acme/settings/models/learn/fields.yaml
+modelClass: Acme\Settings\Models\Learn
+defaultRedirect: acme/settings/learns
+create:
+    redirect: 'acme/settings/learns/update/:id'
+    redirectClose: acme/settings/learns
+update:
+    redirect: acme/settings/learns
+    redirectClose: acme/settings/learns

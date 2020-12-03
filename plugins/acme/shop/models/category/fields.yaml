@@ -1,0 +1,5 @@
+fields:
+    title:
+        label: Название
+        span: full
+        type: text

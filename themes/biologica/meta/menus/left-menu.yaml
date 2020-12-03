@@ -1,0 +1,126 @@
+items:
+    -
+        title: Главная
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: home
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Обучение
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: education
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+        items:
+            -
+                title: 'Online обучение'
+                type: cms-page
+                code: ''
+                reference: online
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+            -
+                title: 'Offline обучение'
+                type: cms-page
+                code: ''
+                reference: offline
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+    -
+        title: 'О нас'
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: about
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+        items:
+            -
+                title: 'О нашем центре'
+                nesting: null
+                type: cms-page
+                url: null
+                code: ''
+                reference: centr
+                cmsPage: null
+                replace: null
+                viewBag:
+                    isHidden: '1'
+                    cssClass: ''
+                    isExternal: '0'
+            -
+                title: 'Наши преподаватели'
+                nesting: null
+                type: cms-page
+                url: null
+                code: ''
+                reference: teachers
+                cmsPage: null
+                replace: null
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+            -
+                title: 'Наша уникальность'
+                nesting: null
+                type: cms-page
+                url: null
+                code: ''
+                reference: featured
+                cmsPage: null
+                replace: null
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+            -
+                title: Отзывы
+                nesting: null
+                type: cms-page
+                url: null
+                code: ''
+                reference: reviews
+                cmsPage: null
+                replace: null
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+    -
+        title: 'Личный кабинет'
+        nesting: null
+        type: url
+        url: 'https://biologica.pro/teach/control/stream'
+        code: ''
+        reference: null
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: cb
+            isExternal: '1'
+name: 'Меню слева'

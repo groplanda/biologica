@@ -1,0 +1,37 @@
+plugin:
+    name: 'acme.settings::lang.plugin.name'
+    description: 'acme.settings::lang.plugin.description'
+    author: Acme
+    icon: oc-icon-wrench
+    homepage: ''
+navigation:
+    settings:
+        label: Настройки
+        url: acme/settings/service
+        icon: icon-wrench
+        iconSvg: plugins/acme/settings/assets/images/settings-icon.svg
+        sideMenu:
+            side-menu-slider:
+                label: Слайдер
+                url: acme/settings/sliders
+                icon: icon-sliders
+            service:
+                label: Услуги
+                url: acme/settings/service
+                icon: icon-cogs
+            side-menu-adv:
+                label: Преимущества
+                url: acme/settings/advantages
+                icon: icon-star
+            side-menu-team:
+                label: Преподаватели
+                url: acme/settings/teams
+                icon: icon-users
+            side-menu-feed:
+                label: Отзывы
+                url: acme/settings/feedback
+                icon: icon-thumbs-o-up
+            side-menu-learning:
+                label: Обучение
+                url: acme/settings/learns
+                icon: icon-book

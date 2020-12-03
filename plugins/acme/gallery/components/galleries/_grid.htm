@@ -1,0 +1,15 @@
+{% set gallery = __SELF__.gallery %}
+<div class="position-center-center">
+  <h3>{{ gallery.title }}</h3>
+</div>
+<ul id="{{ __SELF__.id }}">
+  {% for image in gallery.gallery %}
+  {% set full = image.thumb(800, false) %}
+  {% set poster = image.thumb(250, 200, {'mode': 'crop'}) %}
+  <li>
+    <a data-lighter href="{{ full }}">
+      <img src="{{ poster }}" alt="{{image.title}}" >
+    </a>
+  </li>
+  {% endfor %}
+</ul>

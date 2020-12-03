@@ -1,0 +1,47 @@
+<section id="{{ __SELF__.id }}" class="dark-bg padding-top-100 padding-bottom-100">
+    <div class="container-full"> 
+        <!-- Main Heading -->
+        <div class="heading text-center">
+            <h4>{{ featuredTitle }}</h4>
+            <span></span>
+        </div>
+        <!-- Popular Item Slide -->
+        <div class="papular-block block-slide"> 
+            {% if featured %}
+            {% for product in featured %}
+            <!-- Item -->
+            <div class="item"> 
+            <!-- Item img -->
+            <div class="item-img"> 
+                <img class="img-1" src="{{ product.image|media|resize(300, 380, { mode: 'crop', quality: '80' }) }}" alt="{{ product.title }}"/>
+                {% if product.gallery %}
+                <img class="img-2" src="{{ product.gallery[0].path|resize(300, 380, { mode: 'crop', quality: '80' }) }}" alt="{{ product.gallery[0].title ? product.gallery[0].title : product.title }}" /> 
+                {% endif %}
+                <!-- Overlay -->
+                <div class="overlay">
+                <div class="position-bottom">
+                    <div class="inn">
+                        <a href="{{ product.image|media|resize(560, 694, { mode: 'crop', quality: '80' }) }}" data-lighter>
+                            <i class="icon-magnifier"></i>
+                        </a> 
+                        <a href="#" class="add-to-cart" data-price="{{ product.sale ? product.sale : product.price }}" data-image="{{ product.image|media }}" data-title="{{ product.title }}" data-id="{{ product.id }}">
+                            <i class="icon-basket"></i>
+                        </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- Item Name -->
+            <div class="item-name"> 
+                <a href="{{ 'product'|page({ slug: product.slug }) }}">{{ product.title }}</a> 
+            </div>
+            <!-- Price --> 
+            <span class="price"><small>₽</small>{{ product.sale ? product.sale : product.price }}</span> 
+            </div>
+            {% endfor %}
+            {% else %}
+                <p class="text-center w-100 mb-4">Таких товаров пока нет!</p>
+            {% endif %}
+        </div>
+    </div>
+</section>

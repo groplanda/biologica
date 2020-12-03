@@ -1,0 +1,18 @@
+description = "Drawler menu"
+==
+<ul class="popup-draweler__nav-list full">
+  {% for item in items %}
+  <li class="popup-draweler__nav-item {{ item.items ? 'has-child' : '' }}">
+    <a href="{{ item.url }}" class="popup-draweler__nav-link {{ item.isActive or item.isChildActive ? 'active' : '' }}">{{ item.title }} {% if item.items %}<i class="fas fa-plus open"></i>{% endif %}</a>
+    {% if item.items %}
+    <ul class="dropdown animate__animated">
+      {% for subitem in item.items %}
+      <li class="popup-draweler__nav-item">
+        <a href="{{ subitem.url }}" class="popup-draweler__nav-link">{{ subitem.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,10 @@
+name: Applications
+form: $/acme/contactform/models/application/fields.yaml
+modelClass: Acme\Contactform\Models\Application
+defaultRedirect: acme/contactform/applications
+create:
+    redirect: 'acme/contactform/applications/update/:id'
+    redirectClose: acme/contactform/applications
+update:
+    redirect: acme/contactform/applications
+    redirectClose: acme/contactform/applications

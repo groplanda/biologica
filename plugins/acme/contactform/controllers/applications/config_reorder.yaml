@@ -1,0 +1,4 @@
+title: Applications
+modelClass: Acme\Contactform\Models\Application
+toolbar:
+    buttons: reorder_toolbar

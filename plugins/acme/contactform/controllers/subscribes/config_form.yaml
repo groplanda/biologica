@@ -1,0 +1,10 @@
+name: Subscribes
+form: $/acme/contactform/models/subscribe/fields.yaml
+modelClass: Acme\Contactform\Models\Subscribe
+defaultRedirect: acme/contactform/subscribes
+create:
+    redirect: 'acme/contactform/subscribes/update/:id'
+    redirectClose: acme/contactform/subscribes
+update:
+    redirect: acme/contactform/subscribes
+    redirectClose: acme/contactform/subscribes

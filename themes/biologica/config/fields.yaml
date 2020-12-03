@@ -1,0 +1,116 @@
+tabs:
+  defaultTab: Контакты
+  lazy:
+      - Контакты
+      - Общие
+  paneCssClass:
+      0: first-tab
+      1: second-tab
+  icons:
+      Контакты: icon-phone
+      Общие: icon-cogs
+  fields:
+      phone:
+          type: text
+          label: Телефон
+          span: storm
+          cssClass: col-md-4
+          tab: Контакты
+          placeholder: '8(8442)509-609'
+      t_email:
+          type: email
+          label: E-mail
+          span: storm
+          cssClass: col-md-4
+          tab: Контакты
+          placeholder: 'example@mail.ru'
+      address:
+          type: text
+          label: Адрес
+          span: storm
+          cssClass: col-md-4
+          tab: Контакты
+          placeholder: 'г. Волгоград, ул. Пугачевская 7г'
+      whatsapp:
+          type: text
+          label: WhatsApp
+          span: storm
+          cssClass: col-md-4
+          tab: Контакты
+          placeholder: 79185458705
+      viber:
+          type: text
+          label: Viber
+          span: storm
+          cssClass: col-md-4
+          tab: Контакты
+          placeholder: 79185458705
+      vk:
+          type: text
+          label: Вконтакте
+          span: storm
+          cssClass: col-md-4
+          tab: Контакты
+          placeholder: https://vk.com
+      tg:
+          type: text
+          label: Telegram
+          span: storm
+          cssClass: col-md-4
+          tab: Контакты
+          placeholder: biologica34
+      instagram:
+        type: text
+        label: Instagram
+        span: storm
+        cssClass: col-md-4
+        tab: Контакты
+        placeholder: https://www.instagram.com
+      yandex_map:
+        type: textarea
+        label: Код карты
+        span: storm
+        cssClass: col-md-12
+        size: small
+        tab: Контакты
+      site_name:
+        type: text
+        label: Название сайта
+        span: full
+        tab: Общие
+      logo:
+        label: Логотип
+        type: mediafinder
+        mode: image
+        imageWidth: 150
+        tab: Общие
+      form_photo:
+        label: Фото рядом с формой
+        type: mediafinder
+        mode: image
+        imageWidth: 200
+        tab: Общие
+      counts:
+        type: repeater
+        tab: Общие
+        prompt: Добавить цифру
+        form:
+            fields:
+                title:
+                    label: Заголовок
+                    type: text
+                    span: storm
+                    cssClass: col-md-4
+                ico:
+                    label: Иконка
+                    type: text
+                    span: storm
+                    cssClass: col-md-4
+                    placeholder: fab fa-leanpub
+                    default: fab fa-leanpub
+                    comment: https://fontawesome.com/icons?d=gallery&m=free.
+                number:
+                    label: Цифра
+                    type: number
+                    span: storm
+                    cssClass: col-md-4

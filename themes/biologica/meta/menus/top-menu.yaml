@@ -1,0 +1,50 @@
+items:
+    -
+        title: Главная
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: home
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Обучение
+        type: cms-page
+        code: ''
+        reference: education
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'О нас'
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: about
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Личный кабинет'
+        nesting: null
+        type: url
+        url: 'https://biologica.pro/teach/control/stream'
+        code: ''
+        reference: null
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: cb
+            isExternal: '1'
+name: 'Верхнее меню'

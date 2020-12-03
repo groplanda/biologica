@@ -1,0 +1,21 @@
+description = "Menu left"
+==
+<nav class="left-menu">
+  <ul class="left-menu-list">
+    {% for item in items %}
+    <li class="left-menu-item {{ item.items ? 'has-child' : '' }}">
+      <a href="{{ item.url }}" class="left-menu-link {{ item.isActive or item.isChildActive ? 'active' : '' }}">{{ item.title }}</a>
+      {% if item.items %}
+      <i class="fas fa-chevron-right"></i>
+      <ul class="dropdown">
+        {% for subitem in item.items %}
+        <li class="left-menu-item">
+          <a href="{{ subitem.url }}" class="left-menu-link">{{ subitem.title }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</nav>

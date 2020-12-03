@@ -1,0 +1,5 @@
+title: Advantages
+modelClass: Acme\Settings\Models\Advantages
+nameFrom: title
+toolbar:
+    buttons: reorder_toolbar

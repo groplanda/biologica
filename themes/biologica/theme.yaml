@@ -1,0 +1,6 @@
+name: Biologica
+description: 'Biologica web app'
+author: 'Acme company'
+homepage: ''
+code: ''
+form: 'config/fields.yaml'

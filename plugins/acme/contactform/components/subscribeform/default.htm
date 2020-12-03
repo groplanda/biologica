@@ -1,0 +1,18 @@
+<div id="{{ __SELF__.id }}">
+  <h3>Подписаться на новости</h3>
+  <span>Укажите ваш e-mail и будьте всегда в курсе наших акций и новых поступлений.</span>
+  <form
+    data-request="{{ __SELF__ }}::onSubscribe"
+    data-request-validate
+    data-request-flash
+  >
+    <input type="email" name="subscribe_mail" placeholder="Ваш e-mail">
+    <span class="small text-white" data-validate-for="subscribe_mail"></span>
+    <button type="submit" data-attach-loading>Подписаться</button>
+    {% flash %}
+    <div class="alert alert-{{ type }}" data-interval="4">
+        {{ message }}
+    </div>
+    {% endflash %}
+  </form>
+</div>

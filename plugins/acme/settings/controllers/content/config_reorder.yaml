@@ -1,0 +1,5 @@
+title: Content
+modelClass: Acme\Settings\Models\Content
+nameFrom: title
+toolbar:
+    buttons: reorder_toolbar

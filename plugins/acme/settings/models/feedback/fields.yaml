@@ -1,0 +1,39 @@
+fields:
+    name:
+        label: Имя
+        span: auto
+        type: text
+    time:
+        label: Время
+        span: auto
+        type: text
+    rewiew:
+        label: 'Текст отзыва'
+        size: ''
+        span: full
+        type: textarea
+    rating:
+        label: Оценка
+        span: auto
+        default: ''
+        cssClass: ''
+        type: number
+    email:
+        label: E-mail
+        span: auto
+        type: text
+    avatar:
+        label: Фотография
+        mode: image
+        imageWidth: '80'
+        imageHeight: '80'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    status:
+        label: 'Опубликовать?'
+        span: auto
+        type: switch

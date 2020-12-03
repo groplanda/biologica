@@ -1,0 +1,29 @@
+title = "Наши преподаватели"
+url = "/teachers"
+layout = "default"
+is_hidden = 0
+==
+<?php
+use Acme\Settings\Models\Team;
+
+function onStart()
+{
+  $this['teachers'] = Team::orderBy('created_at', 'asc')->get();
+}
+?>
+==
+<div class="teachers">
+  <div class="teachers__wrap">
+    {% for teacher in teachers %}
+    <div class="teachers__item">
+      <div class="teachers__item__image">
+        <img src="{{ teacher.photo|media|resize(300, 300, { mode: 'crop', quality: '90', extension: 'jpg' }) }}" alt="{{ teacher.name }}" class="teachers__item__pic">
+      </div>
+      <p class="teachers__item__title center">{{ teacher.name }}</p>
+      <p class="teachers__item__descr center">
+        {{ teacher.position }}
+      </p>
+    </div><!--item-->
+    {% endfor %}
+  </div>
+</div>

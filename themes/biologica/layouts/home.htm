@@ -1,0 +1,126 @@
+description = "Home page"
+
+[formwidget]
+formType = "first"
+
+[formwidget formwidget2]
+formType = "third"
+==
+<?php
+use Acme\Settings\Models\Slider;
+
+function onStart()
+{
+  $this['slides'] = Slider::orderBy('created_at', 'asc')->get();
+}
+?>
+==
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  {% partial "app/meta.htm" %}
+</head>
+<body class="modal-open">
+  {% partial "app/preloader.htm" %}
+  <header class="header">
+    {% partial "app/header.htm" %}
+  </header>
+  <main class="main">
+    <section class="slider">
+      <div class="slider-home">
+        {% for slide in slides %}
+        <div class="slide animate__animated">
+          <a href="{{ slide.link }}"></a>
+          <img src="{{ slide.image|media|resize(1920, 800, { mode: 'crop', quality: '80', extension: 'jpg' }) }}" alt="{{ slide.title }}">
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="counter">
+      <div class="counter__wrapper">
+        {% for count in this.theme.counts %}
+
+        {% if loop.index == 1 %}
+        {% set class = 'counter__year' %}
+        {% elseif loop.index == 2 %}
+        {% set class = 'counter__teacher' %}
+        {% elseif loop.index == 3 %}
+        {% set class = 'counter__learning' %}
+        {% else %}
+        {% set class = 'counter__graduate' %}
+        {% endif %}
+        <div class="counter__item">
+          <div class="ico">
+            <i class="{{ count.ico }}"></i>
+          </div>
+          <div class="text">
+            <h5 class="{{ class }}">{{ count.number }}</h5>
+            <p>{{ count.title }}</p>
+          </div>
+        </div><!--item-->
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="timer">
+      <h2 class="title center">До начала <span>ЕГЭ 2021</span> осталось</h2>
+      <div class="timer__wrapper">
+        <div class="timer__item center">
+          <div id="day" class="count animate__animated">00</div>
+          <span>Дней</span>
+        </div>
+        <div class="timer__item center">
+          <div id="hour" class="count animate__animated">00</div>
+          <span>Часов</span>
+        </div>
+        <div class="timer__item center">
+          <div id="minute" class="count animate__animated">00</div>
+          <span>Минут</span>
+        </div>
+        <div class="timer__item center">
+          <div id="second" class="count animate__animated">00</div>
+          <span>Секунд</span>
+        </div>
+      </div>
+      <div class="timer__intro center">
+        <h4 class="subtitle">Успей пройти полный курс подготовки</h4>
+        <a href="#" class="button">Записаться</a>
+      </div>
+    </section>
+    <section class="form">
+      <div class="form__wrapper">
+        <div class="form__item center">
+          <div class="form__title">Заполните форму <span>и мы вам перезвоним</span></div>
+          {% component 'formwidget' %}
+        </div>
+        <div class="form__img">
+          <img src="{{ this.theme.form_photo|media|resize(420, 480, { mode: 'crop', quality: '100' }) }}" alt="консультация">
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    {% partial "app/footer.htm" %}
+  </footer>
+    {% partial "app/drawler.htm" %}
+  <!--modal-->
+  <a href="#!" class="to-top animate__animated scroll-to"><i class="fas fa-angle-up"></i></a>
+  <div class="popup modal-dialog animate__animated" data-modal="true">
+    <div class="popup__dialog">
+      <div class="popup__window animate__animated">
+        <a href="#" class="close"><i class="fas fa-times"></i></a>
+        <div class="popup__header">
+          <h4 class="title center">Оставьте заявку <span>и мы вам перезвоним</span></h4>
+        </div>
+        <div class="popup__body">
+          {% component 'formwidget2' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{{ 'assets/dist/js/index.js'|theme }}"></script>
+  {% framework extras %}
+  {% scripts %}
+</body>
+</html>

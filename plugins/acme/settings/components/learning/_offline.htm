@@ -1,0 +1,20 @@
+{% set programs = __SELF__.programs %}
+
+<div class="courses">
+  <div class="courses__wrapper">
+    {% for program in programs %}
+    <div class="courses__item">
+      <div class="intro center">
+        <h4 class="subtitle">{{ program.title }}</h4>
+        {{ program.description|raw }}
+        <a class="courses__download__link" href="{{ program.file.path }}" download>
+          <img src="{{ 'assets/images/icon/pdf.svg'|theme }}" alt="скачать"><span>Скачать расписание на год.</span>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="order-button center">
+    <button class="button gradient open-modal">Хочу записаться!</button>
+  </div>
+</div>

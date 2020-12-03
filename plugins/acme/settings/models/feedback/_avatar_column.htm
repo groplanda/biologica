@@ -1,0 +1,7 @@
+<? if($record->avatar) {
+  $avatar = $value->getThumb(50, 50, ['mode' => 'crop']);
+} else {
+  $avatar = 'http://placehold.it/50x50';
+}
+?>
+<img src="<?= $avatar ?>" alt="">

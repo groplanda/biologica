@@ -1,0 +1,12 @@
+plugin:
+    name: 'acme.gallery::lang.plugin.name'
+    description: 'acme.gallery::lang.plugin.description'
+    author: Acme
+    icon: oc-icon-image
+    homepage: ''
+navigation:
+    gallery:
+        label: Галерея
+        url: acme/gallery/gallery
+        icon: icon-image
+        iconSvg: plugins/acme/gallery/assets/images/gallery-icon.svg

@@ -1,0 +1,8 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table acme_contactform_order'
+    - builder_table_create_acme_contactform_order.php
+1.0.3:
+    - 'Created table acme_contactform_subscribe'
+    - builder_table_create_acme_contactform_subscribe.php

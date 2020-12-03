@@ -1,0 +1,82 @@
+fields:
+    name:
+        label: 'Название заказа'
+        span: left
+        readOnly: 0
+        type: text
+    status:
+        label: Статус
+        options:
+            new: Новый
+            work: 'В работе'
+            finish: Выполнен
+            close: Закрыт
+        showSearch: true
+        span: auto
+        type: dropdown
+    ip:
+        label: 'IP адрес'
+        span: full
+        default: 127.0.0.1
+        readOnly: 1
+        type: text
+tabs:
+    fields:
+        user_name:
+            label: 'ФИО клиента'
+            span: auto
+            type: text
+            tab: Клиент
+        user_phone:
+            label: Телефон
+            span: auto
+            type: text
+            tab: Клиент
+        user_address:
+            label: Адрес
+            span: auto
+            type: text
+            tab: Клиент
+        user_email:
+            label: E-mail
+            span: auto
+            type: text
+            tab: Клиент
+        user_payment_method:
+            label: 'Способ оплаты'
+            span: auto
+            type: text
+            tab: Клиент
+        user_comment:
+            label: Сообщение
+            size: small
+            span: auto
+            type: textarea
+            tab: Клиент
+        products:
+            label: Товары
+            prompt: Добавить
+            span: full
+            type: repeater
+            tab: Товары
+            form:
+                fields:
+                    title:
+                        label: Название
+                        span: auto
+                        type: text
+                    price:
+                        label: Цена
+                        span: auto
+                        type: text
+                    count:
+                        label: Количество
+                        span: auto
+                        type: text
+                    image:
+                        label: 'Фото товара'
+                        mode: image
+                        imageWidth: '100'
+                        imageHeight: '100'
+                        span: auto
+                        type: mediafinder

@@ -1,0 +1,5 @@
+title: Gallery
+modelClass: Acme\gallery\Models\Gallery
+nameFrom: title
+toolbar:
+    buttons: reorder_toolbar

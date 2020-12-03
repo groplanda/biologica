@@ -1,0 +1,34 @@
+columns:
+    title:
+        label: Название
+        type: text
+        searchable: true
+        sortable: true
+    image:
+        label: Фото
+        type: thumb
+        width: 50
+        height: 50
+        options:
+            mode: crop
+    is_active:
+        label: Статус
+        type: switch
+        sortable: true
+    price:
+        label: Цена
+        type: text
+        searchable: true
+        sortable: true
+    categories:
+        label: Категории
+        type: text
+        searchable: true
+        sortable: true
+        select: title
+        relation: categories
+    created_at:
+        label: 'Дата добавления'
+        type: datetime
+        searchable: true
+        sortable: true

@@ -1,0 +1,22 @@
+fields:
+    title:
+        label: Название
+        span: full
+        type: text
+    description:
+        label: Описание
+        size: small
+        span: full
+        type: textarea
+    gallery:
+        label: Галерея
+        mode: image
+        imageWidth: '100'
+        imageHeight: '100'
+        fileTypes: 'jpg,jpeg,png'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: full
+        type: fileupload

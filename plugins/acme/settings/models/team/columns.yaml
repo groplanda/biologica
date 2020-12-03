@@ -1,0 +1,15 @@
+columns:
+    name:
+        label: Имя
+        type: text
+        searchable: true
+        sortable: true
+    position:
+        label: Должность
+        type: text
+        searchable: true
+        sortable: true
+    created_at:
+        label: 'Время добавления'
+        type: datetime
+        sortable: true
