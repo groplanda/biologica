@@ -1,0 +1,30 @@
+description = "Big cart"
+
+[viewBag]
+==
+<form id="updateCart">
+<!-- Payments Steps -->
+    <div class="shopping-cart">
+      <table class="table cart-table">
+        <thead class="cart-table-title">
+          <tr>
+            <th scope="col">Товар</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Кол-во</th>
+            <th scope="col">Итого</th>
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="shopping-cart-footer buttons">
+      <button type="submit" class="button gradient">Обновить</button>
+      <div class="shopping-cart-footer-result">
+        <div class="order-detail totals-table cart-footer">
+          <p class="all-total">Сумма <span class="total-price total-sum"></span></p>
+        </div>
+        <a href="{{ 'checkout'|page }}" class="button">Оформить заказ</a> </div>
+      </div>
+    </div>
+</form>

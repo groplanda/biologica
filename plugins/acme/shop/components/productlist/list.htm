@@ -1,37 +1,52 @@
-{% if products.total != 0 %}
-{% for product in products %}
-<!-- Item -->
-
-<div class="item"> 
-    <!-- Sale -->
-    {{ product.sale ? '<div class="on-sale">Скидка!</div>' : ''}}
-    <div class="img-ser"> 
-        <img class="img-1 lazyload" src="{{ product.image|media|resize(300, 380, { mode: 'crop', quality: '80' }) }}" alt="{{ product.title }}"> 
-        {% if product.gallery %}
-        <img class="img-2 lazyload" src="{{ product.gallery[0].path|resize(300, 380, { mode: 'crop', quality: '80' }) }}" alt="{{ product.gallery[0].title ? product.gallery[0].title : product.title }}"> 
-        {% endif %}
-    <div class="overlay">
-        {% if product.price %}
-        <div class="add-crt"><a href="#" class="add-to-cart" data-price="{{ product.sale ? product.sale : product.price }}" data-image="{{ product.image|media }}" data-title="{{ product.title }}" data-id="{{ product.id }}">
-            <i class="icon-basket margin-right-10"></i> Добавить в корзину</a>
+{% if children is not empty %}
+    <div class="subcategory__wrapper">
+        {% for item in children %}
+        <div class="subcategory__item">
+            <div class="subcategory__item-header">
+                <h3 class="subcategory__item-title">{{ item.title }}</h3>
+            </div>
+            <div class="category__item-body center">
+                <ul class="subcategory__product-list">
+                    {% for product in item.products %}
+                    <li class="subcategory__product-item">
+                        <a
+                        class="subcategory__product-link"
+                        href="{{ 'product'|page({ slug: product.slug }) }}"
+                        >
+                        {{ product.title }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ 'category'|page({ slug: item.slug }) }}" class="button gradient">Подробнее</a>
+            </div>
         </div>
-        {% endif %}
+        {% endfor %}
     </div>
-    </div>
-    <!-- Item Name -->
-    <div class="item-name">
-        <a href="{{ 'product'|page({ slug: product.slug }) }}" class="i-tittle">{{ product.title }}</a> 
-        <span class="price">
-            {% if product.sale %}
-            <small>₽</small>
-            <span class="line-through">{{ product.price }}</span> 
-            {% endif %}
-            <small>₽</small>{{ product.sale ? product.sale : product.price }}
-        </span> 
-        <a class="deta animated fadeInRight" href="{{ 'product'|page({ slug: product.slug }) }}">Подробнее</a>
-    </div>
-</div>
-{% endfor %}
 {% else %}
-    <p class="text-center w-100 mb-4">Ничего не удалось найти!</p>
+    {% if products.total != 0 %}
+        {% for product in products %}
+        <div class="product__item">
+            {% if product.is_featured %}
+            <div class="product__featured">
+                <i class="fas fa-star"></i>
+            </div>
+            {% endif %}
+            <img src="{{ product.image|media|resize(320, 320, { mode: 'crop', quality: '80' }) }}" class="product__pic" alt="{{ product.title }}">
+            <div class="product__item__card center">
+            <h5 class="subtitle">{{ product.title }}</h5>
+            <div class="product__item__card__descr">
+                {{ html_limit(product.description, 68) }}
+            </div>
+            <div class="product__item__card__price">
+                Стоимость:
+                <span>{{ product.price }}</span>₽
+            </div>
+            <a href="{{ 'product'|page({ slug: product.slug }) }}" class="button gradient">Подробнее</a>
+            </div>
+        </div><!--item-->
+        {% endfor %}
+    {% else %}
+        <p class="center">Ничего не удалось найти!</p>
+    {% endif %}
+
 {% endif %}

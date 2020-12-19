@@ -1,0 +1,27 @@
+fields:
+    title:
+        label: Название
+        span: full
+        type: text
+    category:
+        label: Рубрики
+        prompt: Добавить
+        span: full
+        type: repeater
+        form:
+            fields:
+                name:
+                    label: Заголовок
+                    span: auto
+                    type: text
+                link:
+                    label: Ссылка
+                    span: auto
+                    type: text
+                image:
+                    label: Изображение
+                    mode: image
+                    imageWidth: '150'
+                    imageHeight: '150'
+                    span: auto
+                    type: mediafinder

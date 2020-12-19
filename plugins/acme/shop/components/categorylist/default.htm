@@ -1,0 +1,13 @@
+<div class="category">
+  <div class="category__wrapper">
+    {% for category in categories %}
+    {% set image = category.image.thumb(320, 300, {'mode': 'crop', quality: '90'}) %}
+    <div class="category__item{{ loop.length == 2 ? ' w-50' : '' }}">
+      <div class="category__item__bg" style="background-image: url('{{ image }}')"></div>
+      <a class="category__item__link" href="{{ 'category' | page({ slug: category.slug }) }}">
+        <h3 class="category__item__title center">{{ category.title }}</h3>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>

@@ -1,6 +1,6 @@
-list: $/acme/shop/models/option/columns.yaml
-modelClass: Acme\Shop\Models\Option
-title: Options
+list: $/acme/settings/models/taxonomy/columns.yaml
+modelClass: Acme\Settings\Models\Taxonomy
+title: Taxonomies
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
 showCheckboxes: true
@@ -9,4 +9,4 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
-recordUrl: 'acme/shop/options/update/:id'
+recordUrl: 'acme/settings/taxonomies/update/:id'

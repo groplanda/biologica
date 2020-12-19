@@ -1,9 +1,9 @@
-<?php namespace Acme\Shop\Controllers;
+<?php namespace Acme\Settings\Controllers;
 
 use Backend\Classes\Controller;
 use BackendMenu;
 
-class Options extends Controller
+class Taxonomies extends Controller
 {
     public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController'    ];
     
@@ -13,6 +13,6 @@ class Options extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Acme.Shop', 'main-menu-shop', 'side-menu-option');
+        BackendMenu::setContext('Acme.Settings', 'settings', 'side-menu-tax');
     }
 }

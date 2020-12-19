@@ -19675,12 +19675,16 @@ __webpack_require__(/*! @fancyapps/fancybox */ "./node_modules/@fancyapps/fancyb
 
 __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
 
+__webpack_require__(/*! ./module/cart.js */ "./themes/biologica/assets/js/module/cart.js");
+
 window.addEventListener('DOMContentLoaded', function () {
   var counter = document.querySelector('.counter'),
       toUp = document.querySelector('.to-top'),
       menuItems = document.querySelectorAll('.popup-draweler__nav-link'),
       rewiewAvatars = document.querySelectorAll('.rewiews__avatar__list__item'),
-      comments = document.querySelectorAll('.rewiews__text__comment');
+      comments = document.querySelectorAll('.rewiews__text__comment'),
+      openCart = document.getElementById('openCart'),
+      widthWindow = document.documentElement.clientWidth || window.innerWidth;
 
   try {
     Object(_module_Timer__WEBPACK_IMPORTED_MODULE_0__["default"])('.timer', '2020-12-27');
@@ -19693,6 +19697,22 @@ window.addEventListener('DOMContentLoaded', function () {
     dots: true,
     infinite: true
   });
+  jquery__WEBPACK_IMPORTED_MODULE_5___default()('.open-buy').on('click', function (e) {
+    var modalSelector = document.getElementById('modal');
+    modalSelector.classList.add('loading');
+    jquery__WEBPACK_IMPORTED_MODULE_5___default.a.request('onLoadIframe', {
+      data: {
+        'id': e.target.dataset.id
+      },
+      update: {
+        '@modal.htm': '#modal'
+      }
+    }).done(function () {
+      setTimeout(function () {
+        modalSelector.classList.remove('loading');
+      }, 300);
+    });
+  });
   jquery__WEBPACK_IMPORTED_MODULE_5___default()('.fancybox').fancybox();
   jquery__WEBPACK_IMPORTED_MODULE_5___default()('[data-fancybox="gallery"]').fancybox();
   jquery__WEBPACK_IMPORTED_MODULE_5___default()('form').on('ajaxSuccess', function (event) {
@@ -19703,6 +19723,59 @@ window.addEventListener('DOMContentLoaded', function () {
   });
   jquery__WEBPACK_IMPORTED_MODULE_5___default()(document).on('ajaxPromise', '[data-request]', function () {
     jquery__WEBPACK_IMPORTED_MODULE_5___default()(this).closest('form').find('.form-group.has-error').removeClass('has-error');
+  }); //shop
+
+  jquery__WEBPACK_IMPORTED_MODULE_5___default()('.arrival-block').on('click', '.pagination > ul > li > a.click-page', productFilter);
+  jquery__WEBPACK_IMPORTED_MODULE_5___default()('.arrival-block').on('change', '.nav.nav-tabs > .nav-item > input', productFilter);
+  jquery__WEBPACK_IMPORTED_MODULE_5___default()('.arrival-block').on('click', '#refresh', refreshFilter);
+
+  function refreshFilter(e) {
+    jquery__WEBPACK_IMPORTED_MODULE_5___default()('.checkbox_cat').prop('checked', false);
+    productFilter(e, false);
+  }
+
+  function productFilter(e) {
+    var useCats = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    e.preventDefault();
+    var page = jquery__WEBPACK_IMPORTED_MODULE_5___default()('.click-page.current').attr('href');
+
+    if (jquery__WEBPACK_IMPORTED_MODULE_5___default()(this).hasClass('click-page')) {
+      page = jquery__WEBPACK_IMPORTED_MODULE_5___default()(this).attr('href');
+    }
+
+    var checked = [];
+
+    if (useCats) {
+      jquery__WEBPACK_IMPORTED_MODULE_5___default()('.checkbox_cat:checked').each(function () {
+        checked.push(jquery__WEBPACK_IMPORTED_MODULE_5___default()(this).val());
+      });
+    }
+
+    var top = jquery__WEBPACK_IMPORTED_MODULE_5___default()('.shop-product').offset().top;
+    jquery__WEBPACK_IMPORTED_MODULE_5___default()('html, body').animate({
+      scrollTop: top
+    }, 700);
+    jquery__WEBPACK_IMPORTED_MODULE_5___default.a.request('onFilterProduct', {
+      beforeUpdate: function beforeUpdate() {
+        jquery__WEBPACK_IMPORTED_MODULE_5___default()('.arrival-block.list-group').addClass('loading');
+      },
+      data: {
+        'filter[page]': page,
+        'filter[categories]': checked
+      },
+      update: {
+        '@list.htm': '#partialProducts',
+        '@pagination.htm': '#partialPaginate'
+      }
+    }).done(function () {
+      setTimeout(function () {
+        jquery__WEBPACK_IMPORTED_MODULE_5___default()('.arrival-block.list-group').removeClass('loading');
+      }, 500);
+    });
+  }
+
+  jquery__WEBPACK_IMPORTED_MODULE_5___default()('.ajax-form').on('ajaxSuccess', function (event) {
+    event.currentTarget.reset();
   });
   var CountUpOptions = {
     duration: 5,
@@ -19799,6 +19872,23 @@ window.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+  openCart.addEventListener('click', function (e) {
+    e.preventDefault();
+    var dropdownCart = openCart.nextElementSibling;
+    dropdownCart.classList.toggle('open');
+
+    if (widthWindow <= 600 && dropdownCart.classList.contains('open')) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+  });
+
+  if (widthWindow <= 600) {
+    var headerCart = document.querySelector('.header__cart'),
+        headerWrap = document.querySelector('.header__wrapper');
+    headerWrap.append(headerCart);
+  }
 });
 
 window.onload = function () {
@@ -19972,6 +20062,7 @@ var Modals = function Modals() {
   bindModal('.open-modal', '.modal-dialog', '.modal-dialog .close');
   bindModal('.hamburger.open-menu', '.popup-draweler', '.hamburger.close-menu');
   bindModal('.open-buy', '.modal-buy', '.modal-buy .close');
+  bindModal('.open-iframe', '.modal-iframe', '.modal-iframe .close');
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Modals);
@@ -20047,6 +20138,416 @@ var Timer = function Timer(id, deadline) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Timer);
+
+/***/ }),
+
+/***/ "./themes/biologica/assets/js/module/cart.js":
+/*!***************************************************!*\
+  !*** ./themes/biologica/assets/js/module/cart.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var sidebarCart = document.getElementById('partialCart'),
+    headerCart = document.getElementById('miniCart'),
+    cartTotal = document.getElementById('total-count'),
+    addToCart = document.getElementById('addToCart'),
+    updateCart = document.getElementById('updateCart'),
+    inputProduct = document.getElementById('product-input'),
+    selected = document.getElementById('selected');
+callMethods();
+calculateSum();
+updateInput();
+
+function updateInput() {
+  if (inputProduct) {
+    var products = localStorage.getItem('products') || [];
+    products.length > 0 ? inputProduct.value = JSON.stringify(products) : null;
+  }
+} //обновление корзины
+
+
+if (updateCart) {
+  updateCart.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var inputs = this.getElementsByClassName('qty'),
+        products = JSON.parse(localStorage.getItem('products')) || [],
+        newProduct = Array.from(inputs).map(function (input) {
+      var prefix = input.dataset;
+      return {
+        id: prefix.id,
+        title: prefix.title,
+        price: prefix.price,
+        image: prefix.image,
+        count: input.value
+      };
+    });
+    newProduct.forEach(function (elem) {
+      if (products.find(function (product) {
+        return product.id == elem.id;
+      })) {
+        var _iterator = _createForOfIteratorHelper(products),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var product = _step.value;
+
+            if (product.id == elem.id) {
+              product.count = elem.count;
+              break;
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      } else {
+        products.push({
+          id: elem.id,
+          title: elem.title,
+          image: elem.image,
+          price: elem.price,
+          count: elem.count
+        });
+      }
+
+      localStorage.setItem('products', JSON.stringify(products));
+      callMethods();
+    });
+    changeQty();
+    successMessage('Корзина обновлена!', 'info');
+  });
+} //генерация сообщния добавления товара
+
+
+function successMessage() {
+  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Товар успешно добавлен!';
+  var alertClass = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+  var html = "<div class=\"alert-message\">\n                    <div class=\"alert alert-".concat(alertClass, "\" data-interval=\"4\">").concat(text, "</div>\n                </div>");
+  document.body.insertAdjacentHTML('afterbegin', html);
+  var alert = document.querySelector('.alert-message');
+  setTimeout(function () {
+    alert.style.top = 0;
+  }, 1500);
+  setTimeout(function () {
+    alert.remove();
+  }, 2500);
+} //добавление товара в одиночном товаре
+
+
+if (addToCart) {
+  addToCart.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var prefix = addToCart.qty.dataset;
+    setInLocalStorage(prefix.id, prefix.title, prefix.image, prefix.price, count = addToCart.qty.value);
+    callMethods();
+    successMessage();
+  });
+}
+
+document.addEventListener('click', handleClick); //обработка событий для покупки нового товара и его удаления
+
+function handleClick(e) {
+  var target = e.target;
+
+  if (target.classList.contains('add-to-cart') && target.tagName.toLowerCase() == 'a' || target.parentNode.classList.contains('add-to-cart') && target.parentNode.tagName.toLowerCase() == 'a') {
+    e.preventDefault();
+    addProductToCart(e);
+    callMethods();
+    successMessage();
+  } else if (target.className == 'fas fa-times remove-fa') {
+    e.preventDefault();
+    removeProduct(e);
+    callMethods();
+    successMessage('Товар удален из корзины', 'primary');
+  }
+} //заполнение корзины
+
+
+function fillCart(position) {
+  if (position) {
+    var productWrap = position.querySelector('.shopping-cart-items'),
+        products = JSON.parse(localStorage.getItem('products')) || [],
+        buttons = position.querySelector('.buttons'),
+        _totalSum = position.querySelector('.cart-footer .total-sum');
+
+    if (productWrap) {
+      productWrap.innerHTML = '';
+      products.length > 0 ? pushCart(productWrap, _totalSum, buttons, products, 'standart') : hideFooterCart(_totalSum, buttons, productWrap, '<tr class="cart-item"><td colspan="6">Корзина пуста!</td></tr>');
+    } else if (productWrap = position.querySelector('.cart-table tbody')) {
+      productWrap.innerHTML = '';
+      products.length > 0 ? pushCart(productWrap, _totalSum, buttons, products, 'cart') : hideFooterCart(_totalSum, buttons, productWrap, '<tr class="cart-item"><td colspan="6">Корзина пуста!</td></tr>');
+    } else if (productWrap = position.querySelector('.checkout-table tbody')) {
+      productWrap.innerHTML = '';
+      products.length > 0 ? pushCart(productWrap, _totalSum, buttons, products, 'checkout') : hideFooterCart(_totalSum, buttons, productWrap, '<tr class="cart-item"><td colspan="2">Вы ничего не добавили в корзину!</td></tr>');
+      products.length > 0 ? document.querySelector('form .lower-box button').removeAttribute('disabled') : document.querySelector('form .lower-box button').setAttribute('disabled', true);
+    }
+  }
+} //заполнение корзины
+
+
+function pushCart() {
+  for (var _len = arguments.length, props = new Array(_len), _key = 0; _key < _len; _key++) {
+    props[_key] = arguments[_key];
+  }
+
+  var productWrap = props[0],
+      totalSum = props[1],
+      buttons = props[2],
+      products = props[3],
+      type = props[4]; //spread
+
+  productWrap.insertAdjacentHTML('afterbegin', generateHtml(type, products));
+  totalSum.textContent = calculateSum(products);
+  buttons.classList.remove('d-none');
+} //скрыть подвал корзины если нет товаров
+
+
+function hideFooterCart() {
+  for (var _len2 = arguments.length, props = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+    props[_key2] = arguments[_key2];
+  }
+
+  var totalSum = props[0],
+      buttons = props[1],
+      productWrap = props[2],
+      text = props[3]; //spread
+
+  totalSum.textContent = 0;
+  buttons.classList.add('d-none');
+  productWrap.insertAdjacentHTML('afterbegin', text);
+} //генерация html
+
+
+function generateHtml() {
+  for (var _len3 = arguments.length, props = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+    props[_key3] = arguments[_key3];
+  }
+
+  var type = props[0],
+      products = props[1]; //spread
+
+  var html = '';
+
+  if (type == 'standart') {
+    html = products.map(function (product) {
+      return "<li class=\"cart-item\">\n                        <div class=\"media-left\">\n                        <div class=\"cart-img\">\n                            <img class=\"media-object img-responsive\" src=\"".concat(product.image, "\" alt=\"").concat(product.title, "\">\n                        </div>\n                        </div>\n                        <div class=\"media-body\">\n                        <h6 class=\"media-heading\">").concat(product.title, "</h6>\n                        <span class=\"price\">").concat(product.price, " \u20BD</span>\n                        <span class=\"qty\">\u041A\u043E\u043B-\u0432\u043E: ").concat(product.count, "</span> </div>\n                    </li>");
+    }).join(' ');
+  } else if (type == 'cart') {
+    html = products.map(function (product) {
+      return "<tr>\n                        <th class=\"th-image\">\n                            <div class=\"th-image__wrapper\">\n                                <img class=\"th-image-pic\" src=\"".concat(product.image, "\" alt=\"").concat(product.title, "\" />\n                                <span class=\"th-image-title\">").concat(product.title, "</span>\n                            </div>\n                        </th>\n                        <td><span class=\"price\"><small>\u20BD</small>").concat(product.price, "</span></td>\n                        <td>\n                            <div class=\"quantity\">\n                            <button type=\"button\" class=\"quantity-left-minus\"  data-type=\"minus\" data-field=\"\"> <span>-</span> </button>\n                                <input type=\"number\" id=\"quantity\" class=\"quantity__input qty\" name=\"qty\" min=\"1\" max=\"100\" step=\"1\" value=\"").concat(product.count, "\" data-price=\"").concat(product.price, "\" data-image=\"").concat(product.image, "\" data-title=\"").concat(product.title, "\" data-id=\"").concat(product.id, "\" />\n                            <button type=\"button\" class=\"quantity-right-plus\" data-type=\"plus\" data-field=\"\"> <span>+</span> </button>\n                            </div>\n                        </div>\n                        </td>\n                        <td><span class=\"price\">").concat(Number(product.price) * Number(product.count), "<small>\u20BD</small></span></td>\n                        <td><a href=\"#\"><i class=\"fas fa-times remove-fa\" data-id=\"").concat(product.id, "\"></i></a></td>\n                    </tr>");
+    }).join(' ');
+  } else if (type == 'checkout') {
+    html = products.map(function (product) {
+      return "<tr class=\"cart-item\">\n                        <td class=\"product-name\">".concat(product.title, "&nbsp;\n                            <strong class=\"product-quantity\">\xD7 ").concat(product.count, "</strong>\n                        </td>\n                        <td class=\"product-total\">\n                            <span class=\"woocommerce-Price-amount amount\">").concat(Number(product.price) * Number(product.count), "<span class=\"woocommerce-Price-currencySymbol\">\u20BD</span></span>\n                        </td>\n                    </tr>");
+    }).join(' ');
+  }
+
+  return html;
+} //сумма покупок
+
+
+function calculateSum(products) {
+  var sum = 0;
+
+  if (products) {
+    products = products.map(function (product) {
+      return Number(product.price) * Number(product.count);
+    });
+    sum = products.reduce(function (sum, current) {
+      return sum + current;
+    });
+  }
+
+  return sum;
+} //количество товаров
+
+
+function totalSum() {
+  var sale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var products = JSON.parse(localStorage.getItem('products')) || [];
+  var sum = 0;
+
+  if (products.length > 0) {
+    sum = products.reduce(function (sum, product) {
+      return Number(sum) + Number(product.count);
+    }, 0);
+  }
+
+  if (sale) {
+    sum = Number(sum) * Number(sale);
+  }
+
+  cartTotal.innerHTML = sum;
+} //удаление товара по id
+
+
+function removeProduct(e) {
+  e.preventDefault();
+  var id = e.target.dataset.id;
+  var products = JSON.parse(localStorage.getItem('products'));
+  products = products.filter(function (product) {
+    return product.id !== id;
+  });
+  localStorage.setItem('products', JSON.stringify(products));
+  updateInput();
+} //добавление в корзину
+
+
+function addProductToCart(e) {
+  var prefix = e.target.dataset;
+  setInLocalStorage(prefix.id, prefix.title, prefix.image, prefix.price, count = 1);
+} //добавить в local storage
+
+
+function setInLocalStorage() {
+  for (var _len4 = arguments.length, props = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+    props[_key4] = arguments[_key4];
+  }
+
+  var id = props[0],
+      title = props[1],
+      image = props[2],
+      price = props[3],
+      count = props[4]; //spread
+
+  var products = JSON.parse(localStorage.getItem('products')) || [];
+
+  if (products.find(function (product) {
+    return product.id == id;
+  })) {
+    var _iterator2 = _createForOfIteratorHelper(products),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var product = _step2.value;
+
+        if (product.id == id) {
+          product.count = Number(count) + Number(product.count);
+          break;
+        }
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  } else {
+    products.push({
+      id: id,
+      title: title,
+      image: image,
+      price: price,
+      count: count
+    });
+  }
+
+  localStorage.setItem('products', JSON.stringify(products));
+}
+
+function callMethods() {
+  fillCart(sidebarCart);
+  fillCart(headerCart);
+  totalSum();
+}
+
+jQuery('.order-form').on('ajaxSuccess', function (event) {
+  event.currentTarget.reset();
+  localStorage.removeItem('products');
+  callMethods();
+  calculateSum();
+  updateInput();
+  successMessage('Заказ успешно добавлен!');
+}); //купон на скидку
+
+window.addEventListener('DOMContentLoaded', function () {
+  changeQty();
+}); //qty
+
+function changeQty() {
+  var quantity = document.querySelectorAll('.quantity');
+
+  if (quantity) {
+    quantity.forEach(function (qty) {
+      qty.addEventListener('click', quantityHandle);
+    });
+  }
+
+  function quantityHandle(e) {
+    var target = e.target;
+    checkQtyHanlde(target, 'quantity-right-plus');
+    checkQtyHanlde(target, 'quantity-left-minus', 'minus');
+  }
+
+  function checkQtyHanlde(target, selector) {
+    var operation = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'sum';
+
+    if (target.classList.contains(selector) || target.parentNode.classList.contains(selector)) {
+      var qty = target.closest('.quantity');
+      var input = qty.querySelector('.quantity__input');
+
+      if (operation == 'sum') {
+        if (Number(input.value) < 100) {
+          input.value = Number(input.value) + 1;
+        }
+      } else {
+        if (Number(input.value) > 1) {
+          input.value = Number(input.value) - 1;
+        }
+      }
+    }
+  }
+} //select field
+
+
+if (selected) {
+  var product = document.querySelector('.single-product'),
+      quantity = document.getElementById('quantity'),
+      submitButton = product.querySelector('.add-to-cart');
+  localStorage.setItem('product', JSON.stringify({
+    title: quantity.dataset.title,
+    image: quantity.dataset.image,
+    id: quantity.dataset.id,
+    price: quantity.dataset.price
+  }));
+  selected.addEventListener('change', function (e) {
+    var target = e.target;
+
+    if (target.value === 'null') {
+      submitButton.setAttribute('disabled', true);
+      var productStorage = JSON.parse(localStorage.getItem('product')) || [];
+      setProduct(product, quantity, productStorage.title, productStorage.image, productStorage.price, productStorage.id);
+    } else {
+      var select = target.options[target.selectedIndex],
+          selectedImageSrc = select.dataset.image,
+          selectedTitle = select.value,
+          selectedId = select.dataset.id,
+          selectedPrice = select.dataset.price;
+      setProduct(product, quantity, selectedTitle, selectedImageSrc, selectedPrice, selectedId);
+      submitButton.removeAttribute('disabled');
+    }
+  });
+} //reset
+
+
+function setProduct(product, quantity, title, imageSrc, price, productId) {
+  product.querySelector('.subtitle').textContent = title;
+  product.querySelector('.single-product__pic img').src = imageSrc;
+  product.querySelector('.single-product__content__price span').textContent = price;
+  quantity.dataset.image = imageSrc;
+  quantity.dataset.price = price;
+  quantity.dataset.id = productId;
+  quantity.dataset.title = title;
+}
 
 /***/ }),
 

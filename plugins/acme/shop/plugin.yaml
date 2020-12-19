@@ -10,14 +10,14 @@ navigation:
         url: acme/shop/products
         icon: icon-shopping-cart
         sideMenu:
+            side-menu-product:
+                label: 'Все товары'
+                url: acme/shop/products
+                icon: icon-list
             side-menu-add-product:
                 label: 'Добавить товар'
                 url: acme/shop/products/create
                 icon: icon-plus
-            side-menu-option:
-                label: Опции
-                url: acme/shop/options
-                icon: icon-gears
             side-menu-cat:
                 label: Категории
                 url: acme/shop/categories

@@ -12,3 +12,7 @@ columns:
         label: 'Дата создания'
         type: date
         sortable: true
+    sort_order:
+        label: Порядок
+        type: number
+        sortable: true

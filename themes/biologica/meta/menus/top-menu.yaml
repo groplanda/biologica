@@ -13,10 +13,23 @@ items:
             cssClass: ''
             isExternal: '0'
     -
-        title: Обучение
+        title: КУБ
         type: cms-page
         code: ''
+        reference: club
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Обучение
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
         reference: education
+        cmsPage: null
+        replace: null
         viewBag:
             isHidden: '0'
             cssClass: ''
@@ -28,6 +41,19 @@ items:
         url: null
         code: ''
         reference: about
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Магазин
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: shop
         cmsPage: null
         replace: null
         viewBag:

@@ -1,0 +1,46 @@
+description = "Full page"
+==
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  {% partial "app/meta.htm" %}
+</head>
+<body class="modal-open">
+  {% partial "app/preloader.htm" %}
+  <header class="header">
+    {% partial "app/header.htm" %}
+  </header>
+  <main class="main">
+    <section class="page full">
+      <div class="page__wrapper">
+        <div class="page__content">
+          <h1 class="title center">{{ this.page.title }}</h1>
+          {% page %}
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    {% partial "app/footer.htm" %}
+  </footer>
+    {% partial "app/drawler.htm" %}
+  <!--modal-->
+  <a href="#!" class="to-top animate__animated scroll-to"><i class="fas fa-angle-up"></i></a>
+  <div class="popup modal-dialog animate__animated" data-modal="true">
+    <div class="popup__dialog">
+      <div class="popup__window animate__animated">
+        <a href="#" class="close"><i class="fas fa-times"></i></a>
+        <div class="popup__header">
+          <h4 class="title center">Оставьте заявку <span>и мы вам перезвоним</span></h4>
+        </div>
+        <div class="popup__body">
+          {% component 'formwidget' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{{ 'assets/dist/js/index.js'|theme }}"></script>
+  {% framework extras %}
+  {% scripts %}
+</body>
+</html>

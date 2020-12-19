@@ -57,3 +57,12 @@
 1.0.20:
     - 'Updated table acme_settings_learning'
     - builder_table_update_acme_settings_learning.php
+1.0.21:
+    - 'Updated table acme_settings_slider'
+    - builder_table_update_acme_settings_slider.php
+1.0.22:
+    - 'Updated table acme_settings_learning'
+    - builder_table_update_acme_settings_learning_2.php
+1.0.23:
+    - 'Created table acme_settings_taxonomy'
+    - builder_table_create_acme_settings_taxonomy.php

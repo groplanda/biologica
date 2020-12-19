@@ -1,0 +1,5 @@
+title: Сортирока обучения
+nameFrom: title
+modelClass: Acme\Settings\Models\Learn
+toolbar:
+    buttons: reorder_toolbar

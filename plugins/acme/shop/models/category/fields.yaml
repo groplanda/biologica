@@ -1,5 +1,31 @@
 fields:
     title:
         label: Название
-        span: full
+        span: left
         type: text
+    slug:
+        label: 'Url слаг'
+        span: right
+        preset:
+            field: title
+            type: slug
+        type: text
+    image:
+        label: Фото
+        mode: image
+        imageWidth: '150'
+        imageHeight: '150'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    is_cub:
+        label: 'Показать в КУБе?'
+        span: auto
+        type: switch
+    parent:
+        label: 'Родительская категория'
+        span: auto
+        type: parentbox

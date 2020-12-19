@@ -1,0 +1,5 @@
+title: Сортирока слайдов
+nameFrom: title
+modelClass: Acme\Settings\Models\Slider
+toolbar:
+    buttons: reorder_toolbar

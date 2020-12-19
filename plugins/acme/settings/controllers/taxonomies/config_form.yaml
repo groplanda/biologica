@@ -1,0 +1,10 @@
+name: Taxonomies
+form: $/acme/settings/models/taxonomy/fields.yaml
+modelClass: Acme\Settings\Models\Taxonomy
+defaultRedirect: acme/settings/taxonomies
+create:
+    redirect: 'acme/settings/taxonomies/update/:id'
+    redirectClose: acme/settings/taxonomies
+update:
+    redirect: acme/settings/taxonomies
+    redirectClose: acme/settings/taxonomies

@@ -20,24 +20,32 @@ fields:
         label: 'Популярный?'
         span: auto
         type: switch
+    is_iframe:
+        label: 'Оплата через гет ресурс?'
+        span: auto
+        type: switch
+    price:
+        label: Цена
+        span: auto
+        default: '0'
+        type: number
 tabs:
     fields:
-        price:
-            label: Цена
-            span: auto
-            default: '0'
-            type: number
-            tab: Описание
-        sale:
-            label: 'Цена по скидке'
-            span: auto
-            type: number
-            tab: Описание
         description:
             label: Описание
             size: huge
             span: full
             type: richeditor
+            tab: Описание
+        iframe:
+            label: 'Вставка кода'
+            size: small
+            span: full
+            trigger:
+                action: show
+                field: is_iframe
+                condition: checked
+            type: textarea
             tab: Описание
         image:
             label: 'Фото товара'
@@ -81,8 +89,36 @@ tabs:
             tab: Категории
         options:
             label: Опции
-            nameFrom: title
-            descriptionFrom: description
-            span: auto
-            type: relation
+            prompt: Добавить
+            span: full
+            type: repeater
             tab: Опции
+            form:
+                fields:
+                    option_title:
+                        label: Text
+                        span: auto
+                        type: text
+                    option_price:
+                        label: Цена
+                        span: auto
+                        type: number
+                    option_image:
+                        label: Фото
+                        mode: image
+                        imageWidth: '75'
+                        imageHeight: '75'
+                        span: auto
+                        type: mediafinder
+        file:
+            label: Файл
+            mode: file
+            imageWidth: '100'
+            imageHeight: '100'
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: auto
+            type: fileupload
+            tab: Вложения

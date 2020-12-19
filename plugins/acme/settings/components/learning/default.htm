@@ -17,11 +17,7 @@
       {{ program.description|raw }}
     </div>
     <div class="price-buy center">
-      <button class="button gradient open-buy"
-        data-request="{{ __SELF__ }}::onLoadIframe"
-        data-request-update="'{{ __SELF__ }}::modal': '#learning'"
-        data-request-data="id: {{ program.id }}"
-      >Купить</button>
+      <button class="button gradient open-buy" data-id="{{ program.id }}">Купить</button>
     </div>
   </div>
 </div>
@@ -31,7 +27,9 @@
   <div class="popup__dialog">
     <div class="popup__window animate__animated">
       <a href="#" class="close"><i class="fas fa-times"></i></a>
-      <div class="popup__body" id="learning"></div>
+      <div class="popup__body" id="modal">
+        {% partial "learning::modal" %}
+      </div>
     </div>
   </div>
 </div>

@@ -42,7 +42,7 @@ class Learning extends ComponentBase
     public function onRun()
     {
         $query = new Learn;
-        $this->programs = $query->where( 'type', '=', $this->property('learnType'))->orderBy('created_at', 'asc')->get();
+        $this->programs = $query->where( 'type', '=', $this->property('learnType'))->orderBy('sort_order', 'asc')->get();
     }
 
     public function onLoadIframe() {

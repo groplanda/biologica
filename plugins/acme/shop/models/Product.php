@@ -10,9 +10,12 @@ class Product extends Model
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\Sluggable;
     use \October\Rain\Database\Traits\SoftDelete;
+    use \October\Rain\Database\Traits\Sortable;
+
 
     protected $dates = ['deleted_at'];
     protected $slugs = ['slug' => 'title'];
+    protected $jsonable = ['options'];
 
     /**
      * @var string The database table used by the model.
@@ -31,14 +34,14 @@ class Product extends Model
             'Acme\Shop\Models\Category',
             'table' => 'acme_shop_products_categories',
         ],
-        'options' => [
-            'Acme\Shop\Models\Option',
-            'table' => 'acme_shop_products_option',
-        ]
     ];
 
     public $attachMany = [
         'gallery' => ['System\Models\File', 'delete' => true ]
+    ];
+
+    public $attachOne  = [
+        'file' => ['System\Models\File', 'delete' => true ]
     ];
 
     public function afterDelete() {
@@ -56,7 +59,7 @@ class Product extends Model
             //'start'      => 0,
             //'end'        => $maxPrice,
             'categories' => null,
-            //'sort' => 'title asc'
+            'sort' => 'sort_order asc'
         ], $options));
 
         // if($start || $end) {

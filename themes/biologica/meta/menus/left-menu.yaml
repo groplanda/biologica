@@ -13,6 +13,34 @@ items:
             cssClass: ''
             isExternal: '0'
     -
+        title: КУБ
+        type: cms-page
+        code: ''
+        reference: club
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+        items:
+            -
+                title: 'Тематические наборы'
+                type: url
+                url: /category/tematicheskie-nabory
+                code: ''
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+            -
+                title: 'Контрольные наборы'
+                type: url
+                url: /category/kontrolnye-nabory
+                code: ''
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+    -
         title: Обучение
         nesting: null
         type: cms-page
@@ -28,18 +56,26 @@ items:
         items:
             -
                 title: 'Online обучение'
+                nesting: null
                 type: cms-page
+                url: null
                 code: ''
                 reference: online
+                cmsPage: null
+                replace: null
                 viewBag:
                     isHidden: '0'
                     cssClass: ''
                     isExternal: '0'
             -
                 title: 'Offline обучение'
+                nesting: null
                 type: cms-page
+                url: null
                 code: ''
                 reference: offline
+                cmsPage: null
+                replace: null
                 viewBag:
                     isHidden: '0'
                     cssClass: ''
@@ -110,6 +146,19 @@ items:
                     isHidden: '0'
                     cssClass: ''
                     isExternal: '0'
+    -
+        title: Магазин
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: shop
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
     -
         title: 'Личный кабинет'
         nesting: null

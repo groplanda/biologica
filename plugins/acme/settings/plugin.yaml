@@ -35,3 +35,7 @@ navigation:
                 label: Обучение
                 url: acme/settings/learns
                 icon: icon-book
+            side-menu-tax:
+                label: Рубрики
+                url: acme/settings/taxonomies
+                icon: icon-sitemap

@@ -51,3 +51,45 @@
 1.0.18:
     - 'Created table acme_shop_products_option'
     - builder_table_create_acme_shop_products_option.php
+1.0.19:
+    - 'Updated table acme_shop_categories'
+    - builder_table_update_acme_shop_categories.php
+1.0.20:
+    - 'Updated table acme_shop_products'
+    - builder_table_update_acme_shop_products_9.php
+1.0.21:
+    - 'Updated table acme_shop_products'
+    - builder_table_update_acme_shop_products_10.php
+1.0.22:
+    - 'Drop table acme_shop_option'
+    - builder_table_delete_acme_shop_option.php
+1.0.23:
+    - 'Drop table acme_shop_products_option'
+    - builder_table_delete_acme_shop_products_option.php
+1.0.24:
+    - 'Updated table acme_shop_products'
+    - builder_table_update_acme_shop_products_11.php
+1.0.25:
+    - 'Updated table acme_shop_products'
+    - builder_table_update_acme_shop_products_12.php
+1.0.26:
+    - 'Updated table acme_shop_categories'
+    - builder_table_update_acme_shop_categories_2.php
+1.0.27:
+    - 'Updated table acme_shop_products'
+    - builder_table_update_acme_shop_products_13.php
+1.0.28:
+    - 'Updated table acme_shop_categories'
+    - builder_table_update_acme_shop_categories_3.php
+1.0.29:
+    - 'Updated table acme_shop_products'
+    - builder_table_update_acme_shop_products_14.php
+1.0.30:
+    - 'Updated table acme_shop_products'
+    - builder_table_update_acme_shop_products_15.php
+1.0.31:
+    - 'Updated table acme_shop_products'
+    - builder_table_update_acme_shop_products_16.php
+1.0.32:
+    - 'Updated table acme_shop_categories'
+    - builder_table_update_acme_shop_categories_4.php

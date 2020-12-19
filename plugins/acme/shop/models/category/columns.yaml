@@ -4,8 +4,11 @@ columns:
         type: text
         searchable: true
         sortable: true
-    created_at:
-        label: 'Дата создания'
-        type: datetime
-        searchable: true
+    image:
+        label: Фото
+        type: partial
+        path: '~/plugins/acme/shop/models/category/_image_column.htm'
+    sort_order:
+        label: Порядок
+        type: number
         sortable: true

@@ -8,8 +8,9 @@ use Model;
 class Category extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    
     use \October\Rain\Database\Traits\SoftDelete;
+    use \October\Rain\Database\Traits\Sortable;
+    use \October\Rain\Database\Traits\SimpleTree;
 
     protected $dates = ['deleted_at'];
 
@@ -31,4 +32,13 @@ class Category extends Model
             'table' => 'acme_shop_products_categories'
         ]
     ];
+
+    public $attachOne  = [
+        'image' => ['System\Models\File', 'delete' => true ]
+    ];
+
+    public function scopeSpecial($query)
+    {
+        return $query->where('is_cub', '1');
+    }
 }

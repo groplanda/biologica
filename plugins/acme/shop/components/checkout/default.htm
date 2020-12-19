@@ -1,118 +1,103 @@
-<section class="chart-page padding-top-100 padding-bottom-100">
-    <div class="container"> 
-      
-      <!-- Payments Steps -->
-      <div class="shopping-cart"> 
-        
-        <!-- SHOPPING INFORMATION -->
-        <div class="cart-ship-info">
-          <div class="row"> 
-            
-            <!-- ESTIMATE SHIPPING & TAX -->
-            <div class="col-sm-7">
-              <!-- SHIPPING info -->
-              <h6 class="margin-top-50">Заполните поля</h6>
-              <form
-                class="order-form"
-                data-request="onCheckout"
-                data-request-validate
-                data-request-flash
-              >
-                <input type="hidden" name="products" id="product-input" value="">
-                <ul class="row mb-0">
-                  
-                  <li class="col-md-6">
-                    <label> *ФИО
-                      <input type="text" name="user_name" value="" placeholder="">
-                      <span class="small text-danger" data-validate-for="user_name"></span>
-                    </label>
-                  </li>
-                  <li class="col-md-6">
-                    <label> *ТЕЛЕФОН
-                      <input type="text" name="user_phone" value="" placeholder="">
-                      <span class="small text-danger" data-validate-for="user_phone"></span>
-                    </label>
-                  </li>
-                  <li class="col-md-6"> 
-                    <label> АДРЕС
-                      <input type="text" name="user_address" value="" placeholder="">
-                    </label>
-                  </li>
-                  <li class="col-md-6"> 
-                    <label> EMAIL
-                      <input type="text" name="user_email" value="" placeholder="">
-                      <span class="small text-danger" data-validate-for="user_email"></span>
-                    </label>
-                  </li>
-                  <li class="col-md-12">
-                    <label> КОММЕНТАРИЙ
-                        <textarea name="user_comment"></textarea>
-                        <span class="small text-danger" data-validate-for="user_comment"></span>
-                    </label>
-                  </li>
+<div class="checkout">
+  <div class="checkout__form">
+    <h6 class="checkout__title">Заполните поля</h6>
+      <form
+        class="order-form"
+        data-request="onCheckout"
+        data-request-validate
+        data-request-flash
+      >
+        <input type="hidden" name="products" id="product-input" value="">
+        <ul class="checkout__list">
+
+          <li class="checkout__item">
+            <label> *ФИО
+              <input type="text" name="user_name" class="input" value="" placeholder="">
+              <span class="small text-danger" data-validate-for="user_name"></span>
+            </label>
+          </li>
+          <li class="checkout__item">
+            <label> *Телефон
+              <input type="text" name="user_phone" class="input" value="" placeholder="">
+              <span class="small text-danger" data-validate-for="user_phone"></span>
+            </label>
+          </li>
+          <li class="checkout__item">
+            <label> Адрес
+              <input type="text" name="user_address" class="input" value="" placeholder="">
+            </label>
+          </li>
+          <li class="checkout__item">
+            <label> E-mail
+              <input type="text" name="user_email" class="input" value="" placeholder="">
+              <span class="small text-danger" data-validate-for="user_email"></span>
+            </label>
+          </li>
+          <li class="checkout__item">
+            <label> Комментарий
+                <textarea name="user_comment" class="input"></textarea>
+                <span class="small text-danger" data-validate-for="user_comment"></span>
+            </label>
+          </li>
+        </ul>
+        <div class="order-place">
+            <div class="pay">
+                <ul class="pay__list">
+                <li class="pay__item">
+                    <input type="radio" class="pay__item-input" name="user_payment_method" id="radio1" value="Оплата наличными" checked>
+                    <label class="pay__item-label" for="radio1">ОПЛАТА НАЛИЧНЫМИ</label>
+                    <p class="pay__item-description">Оплата наличными при получении товара.</p>
+                </li>
+                <li class="pay__item">
+                    <input type="radio" class="pay__item-input" name="user_payment_method" id="radio2" value="Оплата картой">
+                    <label class="pay__item-label" for="radio2">ОПЛАТА КАРТОЙ</label>
+                    <p class="pay__item-description">Оплата заказа с помощью банковской карты.</p>
+                </li>
+                <li class="pay__item">
+                  <input type="radio" class="pay__item-input" name="user_payment_method" id="radio3" value="online">
+                  <label class="pay__item-label" for="radio3">Yandex</label>
+                  <p class="pay__item-description">Оплата онлайн yandex.</p>
+                </li>
                 </ul>
-                <div class="order-place">
-                    <div class="pay-meth">
-                        <ul>
-                        <li>
-                            <div class="radio">
-                            <input type="radio" name="user_payment_method" id="radio1" value="Оплата наличными" checked>
-                            <label for="radio1">ОПЛАТА НАЛИЧНЫМИ</label>
-                            </div>
-                            <p>Оплата наличными при получении товара.</p>
-                        </li>
-                        <li>
-                            <div class="radio">
-                            <input type="radio" name="user_payment_method" id="radio2" value="Оплата картой">
-                            <label for="radio2">ОПЛАТА КАРТОЙ</label>
-                            </div>
-                            <p>Оплата заказа с помощью банковской карты.</p>
-                        </li>
-                        </ul>
-                    </div>
-                </div>
-                <ul class="row mt-4 lower-box">
-                    <li class="col-md-4">
-                        <button type="submit" class="btn" data-attach-loading>СДЕЛАТЬ ЗАКАЗ</button>
-                    </li>
-                    <li class="col-md-4">
-                        <a href="{{ 'cart'|page }}" class="btn text-white">В КОРЗИНУ</a>
-                    </li>
-                </ul>
-                {% flash %}
-                <div class="alert alert-{{ type }}" data-interval="4">
-                    {{ message }}
-                </div>
-                {% endflash %}
-              </form>
             </div>
-            
-            <!-- SUB TOTAL -->
-            <div class="col-sm-5">
-              <h6>Ваш заказ</h6>
-              <div class="order-place">
-                <div class="order-detail">
-                    <div id="partialCart">
-                        <table class="table border-0 checkout-table">
-                            <thead class="text-center">
-                                <tr>
-                                    <th class="product-name">Товар</th>
-                                    <th class="product-total">Сумма</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center"></tbody>
-                            <tfoot class="cart-footer text-center">
-                                <tr class="order-total buttons">
-                                    <th>Итого:</th>
-                                    <td><strong class="amount total-sum"></strong>₽</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
+        </div>
+        <ul class="checkout__buttons lower-box">
+            <li class="checkout__buttons-item">
+                <button type="submit" class="button" data-attach-loading>Сделать заказ</button>
+            </li>
+            <li class="checkout__buttons-item">
+                <a href="{{ 'cart'|page }}" class="button gradient">В корзину</a>
+            </li>
+        </ul>
+        {% flash %}
+        <div class="alert alert-{{ type }}" data-interval="4">
+            {{ message }}
+        </div>
+        {% endflash %}
+      </form>
+  </div>
+  <div class="checkout__table">
+    <h6 class="checkout__title">Ваш заказ</h6>
+      <div class="order-place">
+        <div class="order-detail">
+            <div id="partialCart">
+                <table class="table border-0 checkout-table">
+                    <thead >
+                        <tr class="checkout-table-title">
+                            <th class="product-name">Товар</th>
+                            <th class="product-total">Сумма</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot class="cart-footer text-center">
+                        <tr class="order-total buttons">
+                            <th>Итого:</th>
+                            <td><strong class="amount total-sum"></strong>₽</td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
-          </div>
         </div>
       </div>
-    </div>
-</section>
+  </div>
+</div>

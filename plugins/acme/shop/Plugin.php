@@ -10,7 +10,18 @@ class Plugin extends PluginBase
             'Acme\Shop\Components\ProductList' => 'ProductList',
             'Acme\Shop\Components\SingleProduct' => 'SingleProduct',
             'Acme\Shop\Components\Featured' => 'Featured',
-            'Acme\Shop\Components\Checkout' => 'Checkout'
+            'Acme\Shop\Components\Checkout' => 'Checkout',
+            'Acme\Shop\Components\categorylist' => 'CategoryList',
+        ];
+    }
+
+    public function registerFormWidgets()
+    {
+        return [
+            'Acme\Shop\FormWidgets\Parentbox' => [
+                'label' => 'Parent box',
+                'code' => 'parentbox'
+            ]
         ];
     }
 
@@ -20,6 +31,7 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+
         \Event::listen('offline.sitesearch.query', function ($query) {
 
             // The controller is used to generate page URLs.
@@ -27,10 +39,9 @@ class Plugin extends PluginBase
 
             // Search your plugin's contents
             $items = Models\Product::active()->where('title', 'like', "%${query}%")->get();
-            //dd($items);
             // Now build a results array
             $results = $items->map(function ($item) use ($query, $controller) {
-                
+
                 // If the query is found in the title, set a relevance of 2
                 $relevance = mb_stripos($item->title, $query) !== false ? 2 : 1;
 

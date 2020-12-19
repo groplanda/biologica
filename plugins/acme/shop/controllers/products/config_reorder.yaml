@@ -1,0 +1,5 @@
+title: Сортирока товаров
+nameFrom: title
+modelClass: Acme\Shop\Models\Product
+toolbar:
+    buttons: reorder_toolbar

@@ -25,7 +25,8 @@ let mix = require('laravel-mix');
       files: [
         "./themes/biologica/assets/dist/css/*.css",
         "./themes/biologica/**/*.htm",
-        "./themes/biologica/assets/dist/js/*.js"
+        "./themes/biologica/assets/dist/js/*.js",
+        "./themes/biologica/assets/dist/js/vue/*.vue"
       ]
   });
 

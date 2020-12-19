@@ -9,8 +9,8 @@ columns:
         type: text
         searchable: true
         sortable: true
-    created_at:
-        label: 'Дата создания'
-        type: datetime
-        searchable: true
+    sort_order:
+        label: Сортировка
+        type: number
+        searchable: false
         sortable: true

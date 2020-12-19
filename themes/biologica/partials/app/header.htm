@@ -13,5 +13,14 @@ code = "top-menu"
   <button class="hamburger close-menu"></button>
   <nav class="navbar">
      {% partial "app/header-menu" items=menuItems %}
+
+    <div class="header__cart">
+      <a class="header__cart-link" href="#!" id="openCart">
+        <i class="fas fa-shopping-basket"></i>
+        <span id="total-count" class="header__cart-count">0</span>
+      </a>
+      {% partial "app/mini-cart.htm" %}
+    </div>
+
   </nav>
 </div>

@@ -95,6 +95,7 @@ const Modals = () => {
     bindModal('.open-modal', '.modal-dialog', '.modal-dialog .close');
     bindModal('.hamburger.open-menu', '.popup-draweler', '.hamburger.close-menu');
     bindModal('.open-buy', '.modal-buy', '.modal-buy .close');
+    bindModal('.open-iframe', '.modal-iframe', '.modal-iframe .close');
 }
 
 export default Modals;

@@ -6,11 +6,8 @@ columns:
         sortable: true
     image:
         label: Фото
-        type: thumb
-        width: 50
-        height: 50
-        options:
-            mode: crop
+        type: partial
+        path: ~/plugins/acme/shop/models/product/_image_column.htm
     is_active:
         label: Статус
         type: switch
@@ -27,8 +24,8 @@ columns:
         sortable: true
         select: title
         relation: categories
-    created_at:
-        label: 'Дата добавления'
-        type: datetime
-        searchable: true
+    sort_order:
+        label: Порядок
+        type: number
+        searchable: false
         sortable: true

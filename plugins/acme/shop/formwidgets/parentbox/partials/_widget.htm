@@ -1,0 +1,11 @@
+
+<select name="<?=$name ?>" class="form-control custom-select select2-hidden-accessible">
+  <option value="">Нет</option>
+  <?php foreach($categories as $key => $category):  ?>
+  <option
+  <?php if($selectedValue === $key): ?>
+  selected="selected"
+  <?php endif; ?>
+  value="<?= $key?>"><?= $category ?></option>
+  <?php endforeach;  ?>
+</select>

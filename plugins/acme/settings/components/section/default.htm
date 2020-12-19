@@ -1,0 +1,14 @@
+{% set taxonomy = __SELF__.taxonomy %}
+<div id="{{__SELF__.id}}" class="category">
+  <div class="category__wrapper">
+    {% for category in taxonomy.category %}
+    {% set image = category.image|media %}
+    <div class="category__item w-50">
+      <div class="category__item__bg" style="background-image: url('{{ image|resize(420, 300, {'mode': 'crop', quality: '85'}) }}')"></div>
+      <a class="category__item__link" href="{{ category.link }}">
+        <h3 class="category__item__title center">{{ category.name }}</h3>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>

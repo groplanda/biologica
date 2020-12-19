@@ -1,0 +1,5 @@
+title: Сортирока категорий
+nameFrom: title
+modelClass: Acme\Shop\Models\Category
+toolbar:
+    buttons: reorder_toolbar
