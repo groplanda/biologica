@@ -6,12 +6,15 @@ use Mail;
 use Validator;
 use ValidationException;
 use Flash;
+
 use Acme\Shop\Models\Order;
 use Acme\Shop\Models\Product;
 use Backend\Models\User;
+
 use YooKassa\Client;
 
 class Checkout extends ComponentBase {
+
   public function componentDetails()
   {
     return [
@@ -25,6 +28,7 @@ class Checkout extends ComponentBase {
   {
     return User::where('is_superuser', 1)->value('email');
   }
+
   public function onRun()
   {
 
@@ -53,10 +57,7 @@ class Checkout extends ComponentBase {
     } else {
       //переменные
       $allProducts = json_decode($this->convertString(Input::get('products')));
-      $ids = $this->getProductsIds($allProducts);
-      $files = $this->getFilesPath($ids);
       $time = date('m/d/Y H:i:s', time());
-
       $vars = [
         'user_name' => Input::get('user_name'),
         'user_phone' => Input::get('user_phone'),
@@ -66,13 +67,23 @@ class Checkout extends ComponentBase {
         'user_payment_method' => Input::get('user_payment_method'),
         'products' => $allProducts,
         'order'=> 'Заказ - '.$time,
-        'attachments' => $files,
         'order_id' => '',
         'ip' => $_SERVER['REMOTE_ADDR'],
       ];
-
       $items = $this->createProductArray($vars['products']);
       $sum = $this->getSumProducts($vars['products']);
+
+      Mail::send('acme.shop::mail.message', $vars, function($message) {
+        $message->to($this->getUserMail(), 'Admin Person');
+        $message->subject('Новый заказ с сайта');
+      });
+
+      if(isset($vars['user_email']) && !empty($vars['user_email'])) {
+        Mail::send('acme.shop::mail.order', $vars, function($message) use ($vars) {
+          $message->to(trim(Input::get('user_email')), 'Admin Person');
+          $message->subject('Заказ - '.date('m/d/Y H:i:s', time()));
+        });
+      };
 
       if(Input::get('user_payment_method') === 'online') {
         $client = new Client();
@@ -85,7 +96,7 @@ class Checkout extends ComponentBase {
             ],
             'confirmation' => [
               'type' => 'redirect',
-              'return_url' => 'biologica/checkout/kassa',
+              'return_url' => 'moon.bardinteam.ru/checkout/result',
             ],
             'receipt' => [
               'customer' => [
@@ -100,50 +111,11 @@ class Checkout extends ComponentBase {
         //вставка в базу данных
         $this->insertData($vars, $payment['_id']);
         return \Redirect::to($payment['_confirmation']['confirmation_url']);
-      } else {}
-      //отправка на почту
-      /*Mail::send('acme.shop::mail.message', $vars, function($message) {
-        $message->to($this->getUserMail(), 'Admin Person');
-        $message->subject('Новый заказ с сайта');
-      });
-      //если указали почту
-      if(isset($vars['user_email']) && !empty($vars['user_email'])) {
-        Mail::send('acme.shop::mail.order', $vars, function($message) use ($vars) {
-          $message->to(trim(Input::get('user_email')), 'Admin Person');
-          $message->subject('Заказ - '.date('m/d/Y H:i:s', time()));
-          if(!empty($vars['attachments'])) {
-            foreach($vars['attachments'] as $key => $file) {
-              $message->attach($file, ['as' => $key]);
-            }
-          }
-        });
-      }
-      if($query) {
-        Flash::success('Вы успешно заказали!');
       } else {
-        Flash::error('Произошла ошибка!');
-      }*/
-    }
-  }
-
-  private function getProductsIds($products)
-  {
-    $ids = [];
-    foreach($products as $product) {
-      array_push($ids, $product->id);
-    }
-    return $ids;
-  }
-
-  private function getFilesPath($ids) {
-    $files = [];
-    $query = Product::whereIn('id', $ids)->get();
-    foreach($query as $product) {
-      if(isset($product->file) && !empty($product->file)) {
-        $files[$product->file['title']] = $product->file['path'];
+        $this->insertData($vars, null);
+        Flash::success('Вы успешно заказали!');
       }
     }
-    return $files;
   }
 
   private function createProductArray($products) {

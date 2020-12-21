@@ -14,9 +14,13 @@ items:
             isExternal: '0'
     -
         title: КУБ
+        nesting: null
         type: cms-page
+        url: null
         code: ''
         reference: club
+        cmsPage: null
+        replace: null
         viewBag:
             isHidden: '0'
             cssClass: ''
@@ -24,18 +28,26 @@ items:
         items:
             -
                 title: 'Тематические наборы'
+                nesting: null
                 type: url
                 url: /category/tematicheskie-nabory
                 code: ''
+                reference: null
+                cmsPage: null
+                replace: null
                 viewBag:
                     isHidden: '0'
                     cssClass: ''
                     isExternal: '0'
             -
                 title: 'Контрольные наборы'
+                nesting: null
                 type: url
                 url: /category/kontrolnye-nabory
                 code: ''
+                reference: null
+                cmsPage: null
+                replace: null
                 viewBag:
                     isHidden: '0'
                     cssClass: ''
@@ -159,6 +171,52 @@ items:
             isHidden: '0'
             cssClass: ''
             isExternal: '0'
+        items:
+            -
+                title: Мерч
+                type: url
+                url: /category/merch
+                code: ''
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+            -
+                title: Блокнот
+                type: url
+                url: /category/bloknot
+                code: ''
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+            -
+                title: Видеолекции
+                type: url
+                url: /category/videolekcii
+                code: ''
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+            -
+                title: Тесты
+                type: url
+                url: /category/tests
+                code: ''
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
+            -
+                title: Сборник
+                type: url
+                url: /category/sbornik
+                code: ''
+                viewBag:
+                    isHidden: '0'
+                    cssClass: ''
+                    isExternal: '0'
     -
         title: 'Личный кабинет'
         nesting: null

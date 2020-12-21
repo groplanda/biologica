@@ -8,6 +8,7 @@ fields:
         label: Статус
         options:
             new: Новый
+            pay: Оплачен
             work: 'В работе'
             finish: Выполнен
             close: Закрыт

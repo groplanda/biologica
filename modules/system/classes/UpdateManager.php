@@ -30,6 +30,11 @@ class UpdateManager
     use \October\Rain\Support\Traits\Singleton;
 
     /**
+     * @var array The notes for the current operation.
+     */
+    protected $notes = [];
+
+    /**
      * @var \Illuminate\Console\OutputStyle
      */
     protected $notesOutput;
@@ -88,11 +93,6 @@ class UpdateManager
      * @var \Illuminate\Database\Migrations\DatabaseMigrationRepository
      */
     protected $repository;
-
-    /**
-     * @var array An array of messages returned by migrations / seeders. Returned at the end of the update process.
-     */
-    protected $messages = [];
 
     /**
      * Initialize this singleton.
@@ -166,9 +166,6 @@ class UpdateManager
                 $this->seedModule($module);
             }
         }
-
-        // Print messages returned by migrations / seeders
-        $this->printMessages();
 
         return $this;
     }
@@ -348,12 +345,12 @@ class UpdateManager
         /*
          * Rollback modules
          */
-        if (isset($this->notesOutput)) {
-            $this->migrator->setOutput($this->notesOutput);
-        }
-
         while (true) {
             $rolledBack = $this->migrator->rollback($paths, ['pretend' => false]);
+
+            foreach ($this->migrator->getNotes() as $note) {
+                $this->note($note);
+            }
 
             if (count($rolledBack) == 0) {
                 break;
@@ -366,40 +363,22 @@ class UpdateManager
     }
 
     /**
-     * Determines build number from source manifest.
-     *
-     * This will return an array with the following information:
-     *  - `build`: The build number we determined was most likely the build installed.
-     *  - `modified`: Whether we detected any modifications between the installed build and the manifest.
-     *  - `confident`: Whether we are at least 60% sure that this is the installed build. More modifications to
-     *                  to the code = less confidence.
-     *  - `changes`: If $detailed is true, this will include the list of files modified, created and deleted.
-     *
-     * @param bool $detailed If true, the list of files modified, added and deleted will be included in the result.
-     * @return array
-     */
-    public function getBuildNumberManually($detailed = false)
-    {
-        $source = new SourceManifest();
-        $manifest = new FileManifest(null, null, true);
-
-        // Find build by comparing with source manifest
-        return $source->compare($manifest, $detailed);
-    }
-
-    /**
-     * Sets the build number in the database.
-     *
-     * @param bool $detailed If true, the list of files modified, added and deleted will be included in the result.
+     * Asks the gateway for the lastest build number and stores it.
      * @return void
      */
-    public function setBuildNumberManually($detailed = false)
+    public function setBuildNumberManually()
     {
-        $build = $this->getBuildNumberManually($detailed);
+        $postData = [];
 
-        if ($build['confident']) {
-            $this->setBuild($build['build'], null, $build['modified']);
+        if (Config::get('cms.edgeUpdates', false)) {
+            $postData['edge'] = 1;
         }
+
+        $result = $this->requestServerData('ping', $postData);
+
+        $build = (int) array_get($result, 'pong', 420);
+
+        $this->setBuild($build);
 
         return $build;
     }
@@ -424,13 +403,13 @@ class UpdateManager
      */
     public function migrateModule($module)
     {
-        if (isset($this->notesOutput)) {
-            $this->migrator->setOutput($this->notesOutput);
-        }
+        $this->migrator->run(base_path() . '/modules/' . strtolower($module) . '/database/migrations');
 
         $this->note($module);
 
-        $this->migrator->run(base_path() . '/modules/'.strtolower($module).'/database/migrations');
+        foreach ($this->migrator->getNotes() as $note) {
+            $this->note(' - ' . $note);
+        }
 
         return $this;
     }
@@ -448,11 +427,7 @@ class UpdateManager
         }
 
         $seeder = App::make($className);
-        $return = $seeder->run();
-
-        if (isset($return) && (is_string($return) || is_array($return))) {
-            $this->addMessage($className, $return);
-        }
+        $seeder->run();
 
         $this->note(sprintf('<info>Seeded %s</info> ', $module));
         return $this;
@@ -487,14 +462,12 @@ class UpdateManager
      * Sets the build number and hash
      * @param string $hash
      * @param string $build
-     * @param bool $modified
      * @return void
      */
-    public function setBuild($build, $hash = null, $modified = false)
+    public function setBuild($build, $hash = null)
     {
         $params = [
-            'system::core.build' => $build,
-            'system::core.modified' => $modified,
+            'system::core.build' => $build
         ];
 
         if ($hash) {
@@ -545,9 +518,13 @@ class UpdateManager
 
         $this->note($name);
 
-        $this->versionManager->setNotesOutput($this->notesOutput);
+        $this->versionManager->resetNotes()->setNotesOutput($this->notesOutput);
 
-        $this->versionManager->updatePlugin($plugin);
+        if ($this->versionManager->updatePlugin($plugin) !== false) {
+            foreach ($this->versionManager->getNotes() as $note) {
+                $this->note($note);
+            }
+        }
 
         return $this;
     }
@@ -736,8 +713,7 @@ class UpdateManager
         }
 
         $data = $this->requestServerData($type . '/popular');
-        $expiresAt = now()->addMinutes(60);
-        Cache::put($cacheKey, base64_encode(serialize($data)), $expiresAt);
+        Cache::put($cacheKey, base64_encode(serialize($data)), 60);
 
         foreach ($data as $product) {
             $code = array_get($product, 'code', -1);
@@ -826,7 +802,31 @@ class UpdateManager
     {
         if ($this->notesOutput !== null) {
             $this->notesOutput->writeln($message);
+        } else {
+            $this->notes[] = $message;
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the notes for the last operation.
+     * @return array
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Resets the notes store.
+     * @return self
+     */
+    public function resetNotes()
+    {
+        $this->notesOutput = null;
+
+        $this->notes = [];
 
         return $this;
     }
@@ -1014,51 +1014,5 @@ class UpdateManager
     public function getMigrationTableName()
     {
         return Config::get('database.migrations', 'migrations');
-    }
-
-    /**
-     * Adds a message from a specific migration or seeder.
-     *
-     * @param string|object $class
-     * @param string|array $message
-     * @return void
-     */
-    protected function addMessage($class, $message)
-    {
-        if (is_object($class)) {
-            $class = get_class($class);
-        }
-        if (!isset($this->messages[$class])) {
-            $this->messages[$class] = [];
-        }
-
-        if (is_string($message)) {
-            $this->messages[$class][] = $message;
-        } else if (is_array($message)) {
-            array_merge($this->messages[$class], $message);
-        }
-    }
-
-    /**
-     * Prints collated messages from the migrations and seeders
-     *
-     * @return void
-     */
-    protected function printMessages()
-    {
-        if (!count($this->messages)) {
-            return;
-        }
-
-        // Add a line break
-        $this->note('');
-
-        foreach ($this->messages as $class => $messages) {
-            $this->note(sprintf('<info>%s reported:</info>', $class));
-
-            foreach ($messages as $message) {
-                $this->note(' - ' . (string) $message);
-            }
-        }
     }
 }
