@@ -6,11 +6,9 @@ use Mail;
 use Validator;
 use ValidationException;
 use Flash;
-
 use Acme\Shop\Models\Order;
 use Acme\Shop\Models\Product;
 use Backend\Models\User;
-
 use YooKassa\Client;
 
 class Checkout extends ComponentBase {
