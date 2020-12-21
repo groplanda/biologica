@@ -93,3 +93,6 @@
 1.0.32:
     - 'Updated table acme_shop_categories'
     - builder_table_update_acme_shop_categories_4.php
+1.0.33:
+    - 'Updated table acme_shop_orders'
+    - builder_table_update_acme_shop_orders_4.php

@@ -1,2 +1,2 @@
 <?php
-Route::get('/checkout/kassa', 'acme\shop\controllers\Checkouts@index');
+Route::post('/checkout/kassa', 'acme\shop\controllers\Checkouts@index');

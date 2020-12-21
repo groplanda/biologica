@@ -69,6 +69,7 @@ class Checkout extends ComponentBase {
         'products' => $allProducts,
         'order'=> 'Заказ - '.$time,
         'attachments' => $files,
+        'order_id' => '',
       ];
 
       $items = $this->createProductArray($vars['products']);
@@ -97,10 +98,11 @@ class Checkout extends ComponentBase {
           ],
           uniqid('', true)
         );
+        $vars['order_id'] = $payment['_id'];
         return \Redirect::to($payment['_confirmation']['confirmation_url']);
       }
       //вставка в базу данных
-      /*$order = new Order;
+      $order = new Order;
       $order->name = $vars['order'];
       $order->ip = $ip;
       $order->status = 'new';
@@ -113,7 +115,7 @@ class Checkout extends ComponentBase {
       $order->products = $vars['products'];
       $query = $order->save();
       //отправка на почту
-      Mail::send('acme.shop::mail.message', $vars, function($message) {
+      /*Mail::send('acme.shop::mail.message', $vars, function($message) {
         $message->to($this->getUserMail(), 'Admin Person');
         $message->subject('Новый заказ с сайта');
       });
