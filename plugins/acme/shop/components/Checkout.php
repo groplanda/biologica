@@ -59,27 +59,7 @@ class Checkout extends ComponentBase {
       $time = date('m/d/Y H:i:s', time());
       $ip = $_SERVER['REMOTE_ADDR'];
 
-      if(Input::get('user_payment_method') === 'online') {
-        $client = new Client();
-        $client->setAuth(env('SHOP_ID'), env('KASSA_KEY'));
-        $payment = $client->createPayment(
-            array(
-                'amount' => array(
-                    'value' => 100.0,
-                    'currency' => 'RUB',
-                ),
-                'confirmation' => array(
-                    'type' => 'redirect',
-                    'return_url' => 'https://moon.bardinteam.ru',
-                ),
-                'capture' => true,
-                'description' => 'Заказ - '.$time,
-            ),
-            uniqid('', true)
-        );
-      }
-
-      /*$vars = [
+      $vars = [
         'user_name' => Input::get('user_name'),
         'user_phone' => Input::get('user_phone'),
         'user_email' => Input::get('user_email'),
@@ -90,8 +70,37 @@ class Checkout extends ComponentBase {
         'order'=> 'Заказ - '.$time,
         'attachments' => $files,
       ];
+
+      $items = $this->createProductArray($vars['products']);
+      $sum = $this->getSumProducts($vars['products']);
+
+      if(Input::get('user_payment_method') === 'online') {
+        $client = new Client();
+        $client->setAuth(env('SHOP_ID'), env('KASSA_KEY'));
+        $payment = $client->createPayment(
+          [
+            'amount' => [
+              'value' => $sum,
+              'currency' => 'RUB',
+            ],
+            'confirmation' => [
+              'type' => 'redirect',
+              'return_url' => 'biologica/checkout/kassa',
+            ],
+            'receipt' => [
+              'customer' => [
+                'full_name' => Input::get('user_name'),
+                'phone' => Input::get('user_phone'),
+              ],
+              'items' => $items,
+            ],
+          ],
+          uniqid('', true)
+        );
+        return \Redirect::to($payment['_confirmation']['confirmation_url']);
+      }
       //вставка в базу данных
-      $order = new Order;
+      /*$order = new Order;
       $order->name = $vars['order'];
       $order->ip = $ip;
       $order->status = 'new';
@@ -128,7 +137,7 @@ class Checkout extends ComponentBase {
     }
   }
 
-  public function getProductsIds($products)
+  private function getProductsIds($products)
   {
     $ids = [];
     foreach($products as $product) {
@@ -137,7 +146,7 @@ class Checkout extends ComponentBase {
     return $ids;
   }
 
-  public function getFilesPath($ids) {
+  private function getFilesPath($ids) {
     $files = [];
     $query = Product::whereIn('id', $ids)->get();
     foreach($query as $product) {
@@ -148,7 +157,33 @@ class Checkout extends ComponentBase {
     return $files;
   }
 
-  public function convertString($string)
+  private function createProductArray($products) {
+    $result = [];
+    foreach($products as $product) {
+      $result[] = [
+        'description' => $product->title,
+        'quantity' => $product->count,
+        'vat_code' => '2',
+        'amount' => [
+          'value' => $product->price.'.00',
+          'currency' => 'RUB'
+        ],
+        'payment_mode' => 'full_prepayment',
+        'payment_subject' => 'commodity',
+      ];
+    };
+    return $result;
+  }
+
+  private function getSumProducts($products) {
+    $sum = 0;
+    foreach($products as $product) {
+      $sum+= $product->price * $product->count;
+    }
+    return $sum.'.00';
+  }
+
+  private function convertString($string)
   {
     return trim(str_replace('/storage/app/media', '', stripcslashes($string)), '"');
   }
