@@ -1,5 +1,4 @@
-<?php
-namespace Acme\Shop\Components;
+<?php namespace Acme\Shop\Components;
 
 use Cms\Classes\ComponentBase;
 use Input;
@@ -57,7 +56,6 @@ class Checkout extends ComponentBase {
       $ids = $this->getProductsIds($allProducts);
       $files = $this->getFilesPath($ids);
       $time = date('m/d/Y H:i:s', time());
-      $ip = $_SERVER['REMOTE_ADDR'];
 
       $vars = [
         'user_name' => Input::get('user_name'),
@@ -70,6 +68,7 @@ class Checkout extends ComponentBase {
         'order'=> 'Заказ - '.$time,
         'attachments' => $files,
         'order_id' => '',
+        'ip' => $_SERVER['REMOTE_ADDR'],
       ];
 
       $items = $this->createProductArray($vars['products']);
@@ -98,22 +97,10 @@ class Checkout extends ComponentBase {
           ],
           uniqid('', true)
         );
-        $vars['order_id'] = $payment['_id'];
+        //вставка в базу данных
+        $this->insertData($vars, $payment['_id']);
         return \Redirect::to($payment['_confirmation']['confirmation_url']);
-      }
-      //вставка в базу данных
-      $order = new Order;
-      $order->name = $vars['order'];
-      $order->ip = $ip;
-      $order->status = 'new';
-      $order->user_name = $vars['user_name'];
-      $order->user_phone = $vars['user_phone'];
-      $order->user_email = $vars['user_email'];
-      $order->user_address = $vars['user_address'];
-      $order->user_comment = $vars['user_comment'];
-      $order->user_payment_method = $vars['user_payment_method'];
-      $order->products = $vars['products'];
-      $query = $order->save();
+      } else {}
       //отправка на почту
       /*Mail::send('acme.shop::mail.message', $vars, function($message) {
         $message->to($this->getUserMail(), 'Admin Person');
@@ -188,5 +175,24 @@ class Checkout extends ComponentBase {
   private function convertString($string)
   {
     return trim(str_replace('/storage/app/media', '', stripcslashes($string)), '"');
+  }
+
+  private function insertData($data, $u_id) {
+    $order = new Order;
+    $order->name = $data['order'];
+    $order->ip = $data['ip'];
+    $order->status = 'new';
+    $order->user_name = $data['user_name'];
+    $order->user_phone = $data['user_phone'];
+    $order->user_email = $data['user_email'];
+    $order->user_address = $data['user_address'];
+    $order->user_comment = $data['user_comment'];
+    $order->user_payment_method = $data['user_payment_method'];
+    $order->products = $data['products'];
+    if(isset($u_id) && !empty($u_id)) {
+      $order->order_id = $u_id;
+    }
+    $query = $order->save();
+    return $query;
   }
 }
