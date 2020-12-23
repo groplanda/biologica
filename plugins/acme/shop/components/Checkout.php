@@ -94,7 +94,7 @@ class Checkout extends ComponentBase {
             ],
             'confirmation' => [
               'type' => 'redirect',
-              'return_url' => 'moon.bardinteam.ru/checkout/result',
+              'return_url' => 'xn--80abgtbmexb.xn--p1ai/checkout/result',
             ],
             'receipt' => [
               'customer' => [
