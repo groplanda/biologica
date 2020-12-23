@@ -7,7 +7,12 @@ columns:
     image:
         label: Фото
         type: partial
-        path: '~/plugins/acme/shop/models/category/_image_column.htm'
+        path: ~/plugins/acme/shop/models/category/_image_column.htm
+    parent:
+        label: 'Род. категория'
+        type: number
+        select: title
+        relation: parent
     sort_order:
         label: Порядок
         type: number

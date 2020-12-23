@@ -3,7 +3,7 @@
   <option value="">Нет</option>
   <?php foreach($categories as $key => $category):  ?>
   <option
-  <?php if($selectedValue === $key): ?>
+  <?php if($selectedValue == $key): ?>
   selected="selected"
   <?php endif; ?>
   value="<?= $key?>"><?= $category ?></option>

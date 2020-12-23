@@ -34,9 +34,6 @@
             <img src="{{ product.image|media|resize(320, 320, { mode: 'crop', quality: '80' }) }}" class="product__pic" alt="{{ product.title }}">
             <div class="product__item__card center">
             <h5 class="subtitle">{{ product.title }}</h5>
-            <div class="product__item__card__descr">
-                {{ html_limit(product.description, 68) }}
-            </div>
             <div class="product__item__card__price">
                 Стоимость:
                 <span>{{ product.price }}</span>₽

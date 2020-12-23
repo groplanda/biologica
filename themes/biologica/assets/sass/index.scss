@@ -2428,12 +2428,13 @@ article {
     }
   }
   .slider {
+    padding-top: 70px;
     .slide {
-      height: 250px;
+      height: auto;
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
     .slick-arrow {
@@ -2561,8 +2562,14 @@ article {
         font-size: 16px;
       }
     }
-    &__body {
-      padding: 15px;
+    &__body-iframe {
+      max-height: 450px;
+      overflow-y: auto;
+    }
+    &.modal-buy {
+      .popup__body {
+        padding: 5px;
+      }
     }
   }
   .page {
@@ -2580,10 +2587,17 @@ article {
       margin-bottom: 30px;
       &.w-50 {
         width: 100%;
+        margin-left: 0;
+        margin-right: 0;
       }
       &__title {
         font-size: 30px;
       }
+    }
+  }
+  .subcategory {
+    &__item {
+      width: 100%;
     }
   }
   .gallery {

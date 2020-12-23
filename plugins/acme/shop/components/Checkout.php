@@ -55,6 +55,7 @@ class Checkout extends ComponentBase {
     } else {
       //переменные
       $allProducts = json_decode($this->convertString(Input::get('products')));
+      date_default_timezone_set('Europe/Moscow');
       $time = date('m/d/Y H:i:s', time());
       $vars = [
         'user_name' => Input::get('user_name'),
