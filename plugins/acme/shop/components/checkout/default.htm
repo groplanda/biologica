@@ -11,24 +11,24 @@
         <ul class="checkout__list">
 
           <li class="checkout__item">
-            <label> *ФИО
+            <label>ФИО<span>*</span>
               <input type="text" name="user_name" class="input" value="" placeholder="">
               <span class="small text-danger" data-validate-for="user_name"></span>
             </label>
           </li>
           <li class="checkout__item">
-            <label> *Телефон
+            <label>Телефон<span>*</span>
               <input type="text" name="user_phone" class="input" value="" placeholder="">
               <span class="small text-danger" data-validate-for="user_phone"></span>
             </label>
           </li>
           <li class="checkout__item">
-            <label> Адрес
+            <label>Адрес
               <input type="text" name="user_address" class="input" value="" placeholder="">
             </label>
           </li>
           <li class="checkout__item">
-            <label> E-mail
+            <label>E-mail<span>*</span>
               <input type="text" name="user_email" class="input" value="" placeholder="">
               <span class="small text-danger" data-validate-for="user_email"></span>
             </label>
@@ -43,16 +43,6 @@
         <div class="order-place">
             <div class="pay">
                 <ul class="pay__list">
-                <li class="pay__item">
-                    <input type="radio" class="pay__item-input" name="user_payment_method" id="radio1" value="Оплата наличными" checked>
-                    <label class="pay__item-label" for="radio1">ОПЛАТА НАЛИЧНЫМИ</label>
-                    <p class="pay__item-description">Оплата наличными при получении товара.</p>
-                </li>
-                <li class="pay__item">
-                    <input type="radio" class="pay__item-input" name="user_payment_method" id="radio2" value="Оплата картой">
-                    <label class="pay__item-label" for="radio2">ОПЛАТА КАРТОЙ</label>
-                    <p class="pay__item-description">Оплата заказа с помощью банковской карты.</p>
-                </li>
                 <li class="pay__item">
                   <input type="radio" class="pay__item-input" name="user_payment_method" id="radio3" value="online">
                   <label class="pay__item-label" for="radio3">Yandex</label>

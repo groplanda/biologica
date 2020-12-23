@@ -121,6 +121,15 @@ select.input {
   height: 40px;
   font-size: 16px;
 }
+.text-danger {
+  font-size: 13px;
+  font-weight: 500;
+  color: $violet;
+  display: none;
+  &.visible {
+    display: block;
+  }
+}
 .row-input {
   width: 100%;
   display: flex;
@@ -129,15 +138,6 @@ select.input {
   margin-bottom: 25px;
   .input__wrapper {
     width: 48%;
-    .text-danger {
-      font-size: 13px;
-      font-weight: 500;
-      color: $violet;
-      display: none;
-      &.visible {
-        display: block;
-      }
-    }
   }
   .button {
     width: 43%;
@@ -2028,7 +2028,7 @@ body.page {
         }
       }
     }
-}
+  }
 }
 .instagram__link {
   font-size: 22px;
@@ -2153,6 +2153,10 @@ article {
     label {
       font-size: 14px;
       margin-bottom: 5px;
+      span {
+        color: $violet;
+        margin-left: 3px;
+      }
     }
     .input {
       border-radius: 10px;

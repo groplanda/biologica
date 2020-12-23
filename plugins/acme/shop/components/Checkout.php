@@ -37,7 +37,7 @@ class Checkout extends ComponentBase {
     $rules = [
       'user_name'  => 'required|min:3',
       'user_phone' => 'required|min:5',
-      'user_email'  => 'email',
+      'user_email'  => 'required|email',
       'user_comment' => 'max:200'
     ];
 
