@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
         openCart = document.getElementById('openCart'),
         widthWindow = document.documentElement.clientWidth || window.innerWidth;
   try {
-    Timer('.timer', '2021-10-06T09:00:00');
+    Timer('.timer', '2021-06-10T09:00:00');
   } catch {}
   Modals();
   Menu();
