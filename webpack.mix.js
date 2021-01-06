@@ -18,6 +18,13 @@ let mix = require('laravel-mix');
       processCssUrls: false
     })
     .copyDirectory('./node_modules/@fortawesome/fontawesome-free/webfonts', './themes/biologica/assets/dist/webfonts')
+    .options({
+      postCss: [
+      require('autoprefixer')({
+          overrideBrowserslist: ['last 6 versions'],
+              grid: true,
+          })
+    ]})
     .browserSync({
       proxy: 'biologica',
       host: 'biologica',

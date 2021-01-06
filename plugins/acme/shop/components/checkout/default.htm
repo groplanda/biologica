@@ -43,10 +43,10 @@
         <div class="order-place">
             <div class="pay">
                 <ul class="pay__list">
-                <li class="pay__item">
+                <li class="pay__item yandex">
                   <input type="radio" class="pay__item-input" name="user_payment_method" id="radio3" value="online" checked>
-                  <label class="pay__item-label" for="radio3">Yandex</label>
-                  <p class="pay__item-description">Оплата онлайн yandex.</p>
+                  <label class="pay__item-label" for="radio3">Yandex Kassa</label>
+                  <p class="pay__item-description">Оплата онлайн. Вы будете перенаправлены на страницу оплаты.</p>
                 </li>
                 </ul>
             </div>
@@ -59,6 +59,7 @@
                 <a href="{{ 'cart'|page }}" class="button gradient">В корзину</a>
             </li>
         </ul>
+        <a href="{{ 'policy'|staticPage }}" target="_blank" rel="noopener noreferrer">Согласен с политикой конфиденциальности</a>
         {% flash %}
         <div class="alert alert-{{ type }}" data-interval="4">
             {{ message }}

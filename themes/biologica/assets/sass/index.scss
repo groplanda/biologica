@@ -648,13 +648,13 @@ img {
     -o-border-radius: 8px;
     .count {
       background-color: $secondary;
-      width: 70px;
+      width: 80px;
       border-radius: 8px;
       -webkit-border-radius: 8px;
       -moz-border-radius: 8px;
       -ms-border-radius: 8px;
       -o-border-radius: 8px;
-      font-size: 40px;
+      font-size: 35px;
       font-weight: 700;
       color: $white;
       padding: 8px;
@@ -755,6 +755,16 @@ img {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    &.company {
+      margin-top: 15px;
+      text-align: center;
+      justify-content: center;
+      span, a {
+        font-size: 14px;
+        font-weight: 300;
+        margin: 0 5px;
+      }
+    }
   }
   &__messanger {
     width: 33%;
@@ -2214,6 +2224,12 @@ article {
     border-radius: 6px;
     box-shadow: 0 3px 6px rgba($color: $color, $alpha: .15);
     margin-bottom: 10px;
+    &.yandex {
+      background-image: url(/themes/biologica/assets/images/logo-kassa.svg);
+      background-position: 95% 50%;
+      background-size: 100px;
+      background-repeat: no-repeat;
+    }
   }
   &__item-input {
     appearance: none;
@@ -2257,6 +2273,7 @@ article {
   }
   &__item-description {
     font-size: 14px;
+    padding-right: 100px;
   }
 }
 @media (min-width: 801px) and (max-width: 1025px) {
@@ -2381,19 +2398,6 @@ article {
 }
 @media (max-width: 800px) {
   .header {
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      max-width: 200px;
-      height: 100%;
-      background: #fff;
-      z-index: -1;
-      border-radius: 0 0 85% 0;
-      box-shadow: 4px 0px 8px 4px rgb($violet, .4);
-    }
     .logo {
       max-width: 150px;
     }
