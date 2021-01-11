@@ -59,14 +59,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   //shop
-  $('.arrival-block').on('click', '.pagination > ul > li > a.click-page', productFilter);
-  $('.arrival-block').on('change', '.nav.nav-tabs > .nav-item > input', productFilter);
-  $('.arrival-block').on('click', '#refresh', refreshFilter);
-
-  function refreshFilter(e) {
-      $('.checkbox_cat').prop('checked', false);
-      productFilter(e, false);
-  }
+  $('.product').on('click', '.pagination > ul > li > a.click-page', productFilter);
 
   function productFilter(e, useCats = true) {
       e.preventDefault();
@@ -75,21 +68,14 @@ window.addEventListener('DOMContentLoaded', () => {
           page = $(this).attr('href');
       }
 
-      let checked = [];
-      if(useCats) {
-          $('.checkbox_cat:checked').each(function() {
-              checked.push($(this).val());
-          });
-      }
-      const top = $('.shop-product').offset().top;
+      const top = $('.page').offset().top;
       $('html, body').animate({scrollTop: top}, 700);
       $.request('onFilterProduct', {
           beforeUpdate() {
-              $('.arrival-block.list-group').addClass('loading');
+              $('.product').addClass('loading');
           },
           data: {
               'filter[page]': page,
-              'filter[categories]': checked,
           },
           update: {
               '@list.htm' : '#partialProducts',
@@ -98,7 +84,7 @@ window.addEventListener('DOMContentLoaded', () => {
       })
       .done(() => {
           setTimeout(() => {
-              $('.arrival-block.list-group').removeClass('loading');
+              $('.product').removeClass('loading');
           }, 500)
       });
   }

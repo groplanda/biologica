@@ -1496,6 +1496,20 @@ img {
 * PRODUCT CSS STYLES START
 */
 .product {
+  &.loading {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      background: $white url(/themes/biologica/assets/images/icon/loading.gif) no-repeat center;
+      background-size: 100px;
+    }
+  }
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -1557,6 +1571,37 @@ img {
       }
       .button {
         display: inline-flex;
+      }
+    }
+  }
+}
+.pagination {
+  text-align: center;
+  margin: 30px 0;
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    li {
+      margin: 0 5px;
+      .click-page {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $secondary;
+        background: none;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all .3s linear;
+        box-shadow: 0 0 10px rgb($color, .25);
+        border-radius: 2px;
+        &:hover, &:focus, &.active {
+          background: $secondary;
+          color: $white;
+        }
       }
     }
   }
