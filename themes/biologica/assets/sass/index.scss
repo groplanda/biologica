@@ -1155,6 +1155,14 @@ img {
     padding-top: 30px;
     width: 77%;
   }
+  &__title {
+    margin-bottom: 5px;
+  }
+  &__subtitle {
+    color: #de3d52;
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
   .left-menu {
     &-list {
       padding: 0;
@@ -1632,6 +1640,9 @@ img {
       margin-bottom: 20px;
       padding-bottom: 0;
       text-transform: inherit;
+      br {
+        display: none;
+      }
     }
     &__descr {
       margin-bottom: 20px;
@@ -2662,6 +2673,11 @@ article {
       width: 100%;
       max-width: 100%;
       margin-bottom: 30px;
+      &__card {
+        .subtitle {
+          br {display: none}
+        }
+      }
     }
   }
   .single-product {

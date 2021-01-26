@@ -23,7 +23,10 @@ code = "left-menu"
           {% partial "app/secondary-menu" items=menuItems %}
         </div>
         <div class="page__content">
-          <h1 class="title center">{{ this.page.title }}</h1>
+          <h1 class="title center{{ this.page.title == 'Сборник' ? ' page__title' : '' }}">{{ this.page.title }}</h1>
+          {% if this.page.title == 'Сборник' %}
+            <p class="page__subtitle center">Электронная версия</p>
+          {% endif %}
           {% page %}
         </div>
       </div>

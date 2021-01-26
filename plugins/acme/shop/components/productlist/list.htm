@@ -3,7 +3,7 @@
         {% for item in children %}
         <div class="subcategory__item">
             <div class="subcategory__item-header">
-                <h3 class="subcategory__item-title">{{ item.title }}</h3>
+                <h3 class="subcategory__item-title">{{ item.title|raw }}</h3>
             </div>
             <div class="category__item-body center">
                 <ul class="subcategory__product-list">
@@ -33,7 +33,7 @@
             {% endif %}
             <img src="{{ product.image|media|resize(320, 320, { mode: 'crop', quality: '80' }) }}" class="product__pic" alt="{{ product.title }}">
             <div class="product__item__card center">
-            <h5 class="subtitle">{{ product.title }}</h5>
+            <h5 class="subtitle">{{ product.title|raw }}</h5>
             <div class="product__item__card__price">
                 Стоимость:
                 <span>{{ product.price }}</span>₽

@@ -6,7 +6,7 @@
         </a>
       </div>
       <div class="single-product__content">
-        <h1 class="subtitle">{{ product.title }}</h1>
+        <h1 class="subtitle">{{ product.title|raw }}</h1>
         <div class="single-product__content__descr">
             {{ product.description|raw }}
         </div>
