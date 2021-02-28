@@ -959,6 +959,9 @@ img {
   width: 100%;
   height: 100%;
   display: none;
+
+  $root: &;
+
   &.show {
     display: block;
   }
@@ -1016,6 +1019,57 @@ img {
       -ms-border-radius: 8px;
       -o-border-radius: 8px;
     }
+    &_learn {
+      width: 660px;
+      height: 550px;
+
+      #{$root} {
+        &__body {
+          height: 100%;
+        }
+      }
+    }
+  }
+  &__body-inner {
+    height: 100%;
+    padding: 0;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar-button {
+      background-image:url('');
+      background-repeat:no-repeat;
+      width:5px;
+      height:0px
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color:$grey
+    }
+
+    &::-webkit-scrollbar-thumb {
+      -webkit-border-radius: 0px;
+      border-radius: 0px;
+      background-color:$violet;
+    }
+
+    &::-webkit-scrollbar-thumb:hover{
+      background-color:$secondary;
+    }
+
+    &::-webkit-resizer{
+      background-image:url('');
+      background-repeat:no-repeat;
+      width:4px;
+      height:0px
+    }
+
+    &::-webkit-scrollbar{
+      width: 4px;
+    }
+
+  }
+  &__body-iframe {
+    min-height: 900px;
   }
   &__header {
     display: flex;
@@ -2603,6 +2657,8 @@ article {
     }
   }
   .popup {
+    $root: &;
+
     &__window {
       width: 90%;
       transform: translate(0%, 0%);
@@ -2614,20 +2670,37 @@ article {
       right: 0;
       margin: auto;
       top: 10%;
+
+      .close {
+        right: 0;
+        top: 0;
+        border-radius: 8px;
+      }
+
+      &_learn {
+        top: 10px;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+
+        #{$root} {
+          &__body {
+            padding: 5px;
+            height: 100%;
+
+            iframe {
+              height: 1700px;
+            }
+
+          }
+        }
+      }
+
     }
+
     &__header {
       padding: 15px;
       h4 {
         font-size: 16px;
-      }
-    }
-    &__body-iframe {
-      max-height: 450px;
-      overflow-y: auto;
-    }
-    &.modal-buy {
-      .popup__body {
-        padding: 5px;
       }
     }
   }
